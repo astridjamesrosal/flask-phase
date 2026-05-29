@@ -4,6 +4,9 @@
     <title>Library App</title>
 </head>
 <body>
-    <h1>Welcome, {{ name }}.</h1>
+    <form method="POST" action="/greet">
+        <input type="text" name="username" placeholder="Enter your name">
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>
