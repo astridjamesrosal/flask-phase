@@ -4,8 +4,8 @@
     <title>Library App</title>
 </head>
 <body>
-    <form method="POST" action="/greet">
-        <input type="text" name="username" placeholder="Enter your name">
+    <form method="POST" action="/greet">        <!-- method="POST" sends form data as a POST request. action="/greet" is the URL Flask will receive it at. -->
+        <input type="text" name="username" placeholder="Enter your name">   <!-- name="username" is the key Flask uses to read this field via request.form['username'] -->
         <button type="submit">Submit</button>
     </form>
 </body>
