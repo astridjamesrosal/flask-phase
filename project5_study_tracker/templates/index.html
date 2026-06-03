@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Session Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <div class="header">
+        <p class="header-text">Study Session Tracker By Astro</p>
+        <button href="/add_session">Add a Study Session</button>
+    </div>
     <div class="session">
     {% if sessions %}
         {% for session in sessions %}
@@ -21,10 +26,11 @@
         </div>
         {% endfor %}
     {% else %}
-        <p>No logs yet, Better Study!</p>
+    <div class="empty">
+        <img class="panda_sleep" src="{{ url_for('static', filename='Panda Sleeping.jpg') }}">
+        <p>No Logs Yet, Better Study Now!</p>
+    </div>
     {% endif %}
     </div>
-
-    <a href="/add_session">Add a Study Session</a>
 </body>
 </html>
