@@ -11,26 +11,33 @@
         <p class="header-text">Study Session Tracker By Astro</p>
         <a href="/add_session">Add a Study Session</a>
     </div>
-    <div class="session">
     {% if sessions %}
+    <div class="session">
         {% for session in sessions %}
         <div class="session-card">
-                <p>Subject: {{ session[1]}}</p>
-                <p>Start: {{ session[2]}}</p>
-                <p>End: {{ session[3]}}</p>
-                <p>Key Takeaway: {{ session[4]}}</p>
-                <p>Rating: {{ session[5]}}</p>
-            <form action="/delete/{{ session[0] }}" method="POST">
-                <button type="submit">Delete a Session</button>
-            </form>
+                <p><span>Subject:</span> {{ session[1]}}</p>
+                <p><span>Rating:</span> {% for i in range(session[5]) %}<span class="star">★</span>{% endfor %}</p>
+                <p><span>Start:</span> {{ session[2].replace('T', ' ') }}</p>
+                <p><span>End:</span> {{ session[3].replace('T', ' ') }}</p>
+                <div class="takeaway-row">
+                    <div class="takeaway-section">
+                        <p>Key Takeaways:</p>
+                        <p class="textarea">{{ session[4] }}</p>
+                    </div>
+                    <form class="delete-form" action="/delete/{{ session[0] }}" method="POST">
+                        <button type="submit">X</button>
+                    </form>  
+                </div>
         </div>
         {% endfor %}
-    {% else %}
+    </div>
+    {% endif %}
+
+    {% if not sessions %}
     <div class="empty">
         <img class="panda_sleep" src="{{ url_for('static', filename='Panda Sleeping.jpg') }}">
         <p>No Logs Yet, Better Study Now!</p>
     </div>
     {% endif %}
-    </div>
 </body>
 </html>

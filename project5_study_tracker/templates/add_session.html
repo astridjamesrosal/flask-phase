@@ -11,7 +11,7 @@
         <p class="header-text">Study Session Tracker By Astro</p>
         <a href="/add_session">Add a Study Session</a>
     </div>
-    <form action="{{ url_for('add_session_route') }}" method="POST">
+    <form class="add-form" action="{{ url_for('add_session_route') }}" method="POST">
         <div class="one">
             <label for="subject">Subject:</label>
             <input name="subject" id="subject" type="text" placeholder="Ex: Science or Any Field Of Study" required>
