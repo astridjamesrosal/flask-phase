@@ -9,17 +9,17 @@
 <body>
     <div class="header">
         <p class="header-text">Study Session Tracker By Astro</p>
-        <button href="/add_session">Add a Study Session</button>
+        <a href="/add_session">Add a Study Session</a>
     </div>
     <div class="session">
     {% if sessions %}
         {% for session in sessions %}
         <div class="session-card">
-            <p>Subject: {{ session[1]}}</p>
-            <p>Start: {{ session[2]}}</p>
-            <p>End: {{ session[3]}}</p>
-            <p>Key Takeaway: {{ session[4]}}</p>
-            <p>Rating: {{ session[5]}}</p>
+                <p>Subject: {{ session[1]}}</p>
+                <p>Start: {{ session[2]}}</p>
+                <p>End: {{ session[3]}}</p>
+                <p>Key Takeaway: {{ session[4]}}</p>
+                <p>Rating: {{ session[5]}}</p>
             <form action="/delete/{{ session[0] }}" method="POST">
                 <button type="submit">Delete a Session</button>
             </form>

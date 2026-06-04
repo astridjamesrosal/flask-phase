@@ -7,23 +7,31 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <div class="header">
+        <p class="header-text">Study Session Tracker By Astro</p>
+        <a href="/add_session">Add a Study Session</a>
+    </div>
     <form action="{{ url_for('add_session_route') }}" method="POST">
-        <label for="subject">Subject:</label>
-        <input name="subject" id="subject" type="text" required>
-
-        <label for="start">Start-Time:</label>
-        <input name="start_time" id="start" type="datetime-local" required>
-
-        <label for="end">End-Time:</label>
-        <input name="end_time" id="end" type="datetime-local" required>
-
+        <div class="one">
+            <label for="subject">Subject:</label>
+            <input name="subject" id="subject" type="text" placeholder="Ex: Science or Any Field Of Study" required>
+        </div>
+        <div class="two">
+            <label for="prodrat">My Productivity Rating:</label>
+            <input name="productivity_rating" id="prodrat" type="number" min="1" max="5" placeholder="Rate from 1 to 5" required>
+        </div>
+        <div class="three">
+            <label for="start">Start-Time:</label>
+            <input name="start_time" id="start" type="datetime-local" required>
+        </div>
+        <div class="four">
+            <label for="end">End-Time:</label>
+            <input name="end_time" id="end" type="datetime-local" required>
+        </div>
         <label for="keytak">My Keytakeaways:</label>
-        <textarea name="key_takeaways" id="keytak" required></textarea>
-
-        <label for="prodrat">My Productivity Rating:</label>
-        <input name="productivity_rating" id="prodrat" type="number" min="1" max="5" required>
-
-        <button type="submit">Save Log</button>
+        <textarea name="key_takeaways" id="keytak" placeholder="I have learned..." required></textarea>
+        
+        <button type="submit">Add Session</button>
     </form>
 </body>
 </html>

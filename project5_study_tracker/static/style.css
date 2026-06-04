@@ -26,7 +26,7 @@ body {
     font-size: 35px;
 }
 
-button {
+a {
     background: #003049;
     margin: 10px;
     text-decoration: none;
@@ -36,7 +36,7 @@ button {
     font-size: 35px;
 }
 
-button:hover {
+a:hover {
     background: #D62828;
 }
 
@@ -56,4 +56,95 @@ button:hover {
     width: 32rem;
     padding-top: 2rem;
     padding-left: 10rem;
+}
+
+form {
+    background: #003049;
+    padding: 2rem 3rem 2rem 2.7rem;
+    border-radius: 20px;
+    margin: 1rem 4rem 1rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+label {
+    color: #EAE2B7;
+    font-size: 30px;
+}
+
+form div {
+    display: grid;
+}
+
+input {
+    border-radius: 10px;
+    background: #EAE2B7;
+}
+
+.one input {
+    height: 3rem;
+    width: 30rem;
+    font-size: 30px;
+    padding-left: 1rem;
+}
+
+.two {
+    padding-left: 3.8rem;
+}
+
+.two input {
+    height: 3rem;
+    width: 30rem;
+    font-size: 30px;
+    padding-left: 1rem;
+}
+
+.three input {
+    height: 3rem;
+    width: 30rem;
+    font-size: 30px;
+    padding-left: 1rem;
+}
+
+.four {
+    padding-left: 3.8rem;
+}
+
+.four input {
+    height: 3rem;
+    width: 30rem;
+    font-size: 30px;
+    padding-left: 1rem;
+}
+
+textarea {
+    height: 6rem;
+    width: 70rem;
+    font-size: 25px;
+    grid-column: span 2;
+    border-radius: 10px;
+    padding-left: 1rem;
+    background: #EAE2B7;
+}
+
+button {
+    background: #EAE2B7;
+    padding: 1rem;
+    color: #D62828;
+    font-size: 30px;
+    height: 5rem;
+    width: 20rem;
+    display: block;
+    margin-left: auto;
+    grid-column: 2;
+    justify-self: end;
+    border-radius: 10px;
+    margin-bottom: -4rem;
+    margin-top: 1rem;
+}
+
+button:hover {
+    background: #D62828;
+    color: #EAE2B7;
 }
