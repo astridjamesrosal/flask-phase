@@ -8,14 +8,18 @@
 </head>
 <body>
     <div class="navbar">
-        <p class="title">PANDO</p>
-        <p class="catch">PLAN. DO.</p>
-        <p class="navbar-text" href="/index">Home</p>
-        <a class="add-session" href="/add_session">Add Study Session</a>
+        <div class="navbar-brand">
+            <p class="title">PANDO</p>
+            <p class="catch">PLAN. DO.</p>
+        </div>
+        <div class="navbar-links">
+            <a class="home-link" href="/">Home</a>
+            <a class="add-session" href="/add_session">Add Study Session</a>
+        </div>
     </div>
     <form class="confirm" action="/delete/{{ session[0] }}" method="POST">
         <div class="main_body">
-            <p class="main-text">Are you sure you want to delete "{{ session[1] }}"</p>
+            <p class="main-text">Are you sure you want to delete <span class="subject-box">"{{ session[1] }}"</span></p>
             <img class="panda_ques" src="{{ url_for('static', filename='Panda Question Mark.jpg') }}">
         </div>
         <input type="hidden" name="session_id" value="{{ session[0] }}">

@@ -8,23 +8,27 @@
 </head>
 <body>
     <div class="navbar">
-        <p class="title">PANDO</p>
-        <p class="catch">PLAN. DO.</p>
-        <p class="navbar-text" href="/index.html">Home</p>
-        <a class="add-session" href="/add_session">Add Study Session</a>
+        <div class="navbar-brand">
+            <p class="title">PANDO</p>
+            <p class="catch">PLAN. DO.</p>
+        </div>
+        <div class="navbar-links">
+            <a class="home-link active" href="/">Home</a>
+            <a class="add-session" href="/add_session">Add Study Session</a>
+        </div>
     </div>
     {% if sessions %}
     <div class="session">
         {% for session in sessions %}
         <div class="session-card">
                 <p><span>Subject:</span> {{ session[1]}}</p>
-                <p><span>Rating:</span> {% for i in range(session[5]) %}<span class="star">★</span>{% endfor %}</p>
+                <p class="rating">{% for i in range(session[5]) %}<span class="star">★</span>{% endfor %}</p>
                 <p><span>Start:</span> {{ session[2].replace('T', ' ') }}</p>
-                <p><span>End:</span> {{ session[3].replace('T', ' ') }}</p>
+                <p><span class="end">End:</span> {{ session[3].replace('T', ' ') }}</p>
                 <div class="takeaway-row">
                     <div class="takeaway-section">
                         <p>Key Takeaways:</p>
-                        <p class="textarea">{{ session[4] }}</p>
+                        <p class="main_textarea">{{ session[4] }}</p>
                     </div>
                     <a class="delete-form" href="/confirm_delete/{{ session[0] }}">X</a>  
                 </div>

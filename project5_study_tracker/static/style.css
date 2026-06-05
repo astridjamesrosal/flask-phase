@@ -6,28 +6,74 @@
 }
 
 body {
-    background-color: #FCBF49;
+    background-color: #b6d96c;
 }
 
 .navbar {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 1rem;
-    background: black;
+    background: #e5f2c9;
     width: 80rem;
     border-radius: 50px;
-    align-self: center;
     margin-left: 2rem;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.466);
     align-self: flex-end;
 }
 
-.title, .catch, .navbar-text, .add-session {
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    padding-left: 4rem;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-right: 7rem;
+}
+
+.title, .catch, .home-link, .add-session {
     justify-content: space-evenly;
     text-decoration: none;
     padding: 1rem;
-    font-size: 20px;
-    border-radius: 10px;
-    color: #EAE2B7;
+    font-size: 25px;
+    color: #23260c;
+}
+
+.title {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-weight: bold;     
+    font-size: 30px;
+    font-style: italic;  
+    color: #13452E;   
+    letter-spacing: 2px; 
+}
+
+.home-link {
+    padding: 10px;
+    border-radius: 50px;
+    margin: 0.5rem;
+    color: #3c5940;
+}
+
+.add-session {
+    padding: 10px;
+    border-radius: 50px;
+    margin: 0.5rem;
+    color: #3c5940;
+}
+
+.home-link:hover, .add-session:hover {
+    background: #3c5940;
+    color: #e5f2c9;
+}
+
+.active {
+    background: #3c5940;
+    color: #e5f2c9;
 }
 
 .empty {
@@ -50,10 +96,10 @@ body {
 }
 
 .add-form {
-    background: #003049;
+    background: #3c593f;
     padding: 2rem 3rem 2rem 2.7rem;
     border-radius: 20px;
-    margin: 1rem 4rem 1rem 4rem;
+    margin: 2.5rem 4rem 1rem 4rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
@@ -109,6 +155,16 @@ input {
     padding-left: 1rem;
 }
 
+.main_textarea {
+    height: 6rem;
+    width: 70rem;
+    font-size: 25px;
+    grid-column: span 2;
+    border-radius: 10px;
+    padding-left: 1rem;
+    background: #7fa643;
+}
+
 textarea {
     height: 6rem;
     width: 70rem;
@@ -116,13 +172,14 @@ textarea {
     grid-column: span 2;
     border-radius: 10px;
     padding-left: 1rem;
-    background: #EAE2B7;
+    background: #e7f2cb;
 }
 
 button {
-    background: #EAE2B7;
+    background: #e7f2cb;
     padding: 1rem;
-    color: #D62828;
+    color: #3c5940;
+    font-weight: bold;
     font-size: 30px;
     height: 5rem;
     width: 20rem;
@@ -136,7 +193,7 @@ button {
 }
 
 button:hover {
-    background: #D62828;
+    background: #7fa643;
     color: #EAE2B7;
 }
 
@@ -151,21 +208,21 @@ button:hover {
 }
 
 .session-card {
-    background: #003049;
+    background: #e5f2c9;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
     margin: 0 auto;
     padding: 1.5rem;
     border-radius: 20px;
-    color: #EAE2B7;
+    color: black;
     font-size: 20px;
     width: 100%;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.466); padding: 20px; background: #003049;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.466); padding: 20px;
 }
 
 .session-card a {
-    background: #D62828;
+    background: #3c5940;
     border-radius: 100px;
     color: Black;
     font-size: 20px;
@@ -177,25 +234,23 @@ button:hover {
     justify-content: center;
     margin-bottom: 0;
     margin-left: 0.5rem;
+    color: white;
 }
 
-.takeaway-section .textarea {
+.takeaway-section .main_textarea {
     width: 100%;
     font-size: 18px;
     border-radius: 10px;
-    padding: 0.2rem;
-    background: #EAE2B7;
-    color: black;
+    padding: 0.5rem;
+    background: #7fa643;
+    color: #e5f2c9;
     box-sizing: border-box;    
     margin-top: 0.5rem;
 }
 
-.takeaway-section p:first-of-type{
-    color:#FCBF49;
-}
-
-span {
-    color:#FCBF49;
+.takeaway-section p:first-of-type, span {
+    color:#3c5940;
+    font-weight: bold;
 }
 
 .takeaway-section {
@@ -221,24 +276,39 @@ span {
 
 .star {
     color: #FCBF49;
-    font-size: 20px;
+    font-size: 50px;
+}
+
+.rating {
+    text-align: right;
+    align-self: start;
+    margin-top: -1rem;
 }
 
 .confirm {
     border: 5px solid white;
-    background: #FCBF49;
-    color: black;
+    background: #3c593f;
+    color: #EAE2B7;
     padding: 1rem;
     width: auto;
     font-size: 20px;
-    margin: 1rem 4rem 2rem 4rem;
+    margin: 4rem 4rem 2rem 4rem;
     height: 25rem;
+    border-radius: 20px;
 }
 
+.subject-box {
+    display: inline;
+    box-decoration-break: clone;
+    background: #81a844;
+    border-radius: 20px;
+    margin: auto;
+    padding: 0.5rem;
+}
 .panda_ques {
     height: 15rem;
     width: 15rem;
-    padding-left: 0.5rem;
+    margin-left: 0;
 }
 
 .main_body {
@@ -248,13 +318,12 @@ span {
 
 .main-text {
     font-size: 60px;
-    
 }
 
 .back a {
     background: #EAE2B7;
     padding: 1rem;
-    color: #D62828;
+    color: #3c5940;
     font-size: 35px;
     height: 5rem;
     width: 20rem;
@@ -267,7 +336,7 @@ span {
 }
 
 .back a:hover {
-    background: #D62828;
+    background: #d92d27;
     color: #EAE2B7;
 }
 
