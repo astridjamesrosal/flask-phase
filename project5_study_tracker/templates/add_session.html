@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="header">
-        <p class="header-text">Study Session Tracker By Astro</p>
-        <a class="add-session" href="/add_session">Add a Study Session</a>
+    <div class="navbar">
+        <p class="title">PANDO</p>
+        <p class="catch">PLAN. DO.</p>
+        <p class="navbar-text" href="/index">Home</p>
+        <a class="add-session" href="/add_session">Add Study Session</a>
     </div>
     <form class="add-form" action="{{ url_for('add_session_route') }}" method="POST">
         <div class="one">
