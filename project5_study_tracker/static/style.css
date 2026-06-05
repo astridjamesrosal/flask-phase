@@ -27,7 +27,7 @@ body {
     font-size: 35px;
 }
 
-a {
+.add-session {
     background: #003049;
     margin: 10px;
     text-decoration: none;
@@ -37,7 +37,7 @@ a {
     font-size: 35px;
 }
 
-a:hover {
+.add-session:hover {
     background: #D62828;
 }
 
@@ -173,7 +173,7 @@ button:hover {
     width: 100%;
 }
 
-.session-card button {
+.session-card a {
     background: #D62828;
     border-radius: 100px;
     color: Black;
@@ -185,6 +185,7 @@ button:hover {
     align-items: center;
     justify-content: center;
     margin-bottom: 0;
+    margin-left: 0.5rem;
 }
 
 .takeaway-section .textarea {
@@ -218,6 +219,7 @@ span {
     justify-content: flex-end;
     align-items: center;
     padding-left: 0.5rem;
+    margin-top: 5rem;
 }
 
 .takeaway-row {
@@ -226,6 +228,58 @@ span {
 }
 
 .star {
-    color: yellow;
+    color: #FCBF49;
     font-size: 20px;
+}
+
+.confirm {
+    border: 5px solid white;
+    background: #FCBF49;
+    color: black;
+    padding: 1rem;
+    width: auto;
+    font-size: 20px;
+    margin: 1rem 4rem 2rem 4rem;
+    height: 25rem;
+}
+
+.panda_ques {
+    height: 15rem;
+    width: 15rem;
+    padding-left: 0.5rem;
+}
+
+.main_body {
+    display: flex;
+    padding: 4rem 2rem 2rem 2rem;
+}
+
+.main-text {
+    font-size: 60px;
+    
+}
+
+.back a {
+    background: #EAE2B7;
+    padding: 1rem;
+    color: #D62828;
+    font-size: 35px;
+    height: 5rem;
+    width: 20rem;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 2px solid black;
+    display: block;
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+.back a:hover {
+    background: #D62828;
+    color: #EAE2B7;
+}
+
+.confirm button {
+    display: block;
+    margin-top: -5rem;
 }

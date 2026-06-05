@@ -1,5 +1,5 @@
 from flask import Flask, redirect, url_for, render_template, request
-from database import init_db, add_session, get_all_sessions, delete_session
+from database import init_db, add_session, get_all_sessions, delete_session, get_session
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
@@ -25,6 +25,11 @@ def delete_session_route(session_id):
     delete_session(session_id)
     return redirect(url_for('index'))
     
+@app.route('/confirm_delete/<session_id>', methods=['GET'])
+def confirm_delete_session_route(session_id):
+    session = get_session(session_id)
+    return render_template('delete_session.html', session=session)
+
 if __name__ == '__main__':
     init_db()
     app.run(debug=True)

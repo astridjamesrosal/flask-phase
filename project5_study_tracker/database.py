@@ -23,6 +23,14 @@ def add_session(subject, start_time, end_time, key_takeaways, productivity_ratin
     connection.commit()
     connection.close()
 
+def get_session(session_id):
+    connection = sqlite3.connect('study_sessions.db')
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM Sessions WHERE session_id = ?;", (session_id,))
+    single_session = cursor.fetchone()
+    connection.close()
+    return single_session
+
 def get_all_sessions():
     connection = sqlite3.connect('study_sessions.db')
     cursor = connection.cursor()

@@ -9,7 +9,7 @@
 <body>
     <div class="header">
         <p class="header-text">Study Session Tracker By Astro</p>
-        <a href="/add_session">Add a Study Session</a>
+        <a class="add-session" href="/add_session">Add a Study Session</a>
     </div>
     {% if sessions %}
     <div class="session">
@@ -24,9 +24,7 @@
                         <p>Key Takeaways:</p>
                         <p class="textarea">{{ session[4] }}</p>
                     </div>
-                    <form class="delete-form" action="/delete/{{ session[0] }}" method="POST">
-                        <button type="submit">X</button>
-                    </form>  
+                    <a class="delete-form" href="/confirm_delete/{{ session[0] }}">X</a>  
                 </div>
         </div>
         {% endfor %}
