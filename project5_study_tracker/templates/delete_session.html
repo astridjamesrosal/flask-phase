@@ -19,7 +19,7 @@
     </div>
     <form class="confirm" action="/delete/{{ session[0] }}" method="POST">
         <div class="main_body">
-            <p class="main-text">Are you sure you want to delete <span class="subject-box">"{{ session[1] }}"</span></p>
+            <p class="main-text">Are you sure you want to delete <span class="subject-highlight">"{{ session[1] }}"</span></p>
             <img class="panda_ques" src="{{ url_for('static', filename='Panda Question Mark.jpg') }}">
         </div>
         <input type="hidden" name="session_id" value="{{ session[0] }}">

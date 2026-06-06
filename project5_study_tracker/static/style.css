@@ -297,10 +297,10 @@ button:hover {
     border-radius: 20px;
 }
 
-.subject-box {
+.subject-highlight {
     display: inline;
     box-decoration-break: clone;
-    background: #81a844;
+    color: #81a844;
     border-radius: 20px;
     margin: auto;
     padding: 0.5rem;
@@ -314,6 +314,8 @@ button:hover {
 .main_body {
     display: flex;
     padding: 4rem 2rem 2rem 2rem;
+    margin-right: 2rem;
+    margin-left: 2rem;
 }
 
 .main-text {
