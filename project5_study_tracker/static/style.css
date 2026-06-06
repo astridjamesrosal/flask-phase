@@ -335,6 +335,7 @@ button:hover {
     display: block;
     grid-column: 1 / -1;
     text-align: center;
+    font-weight: bold;
 }
 
 .back a:hover {
