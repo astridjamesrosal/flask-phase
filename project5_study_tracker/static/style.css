@@ -9,6 +9,7 @@ body {
     background-color: #b6d96c;
 }
 
+/* Shared — Navbar (all pages) */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -76,10 +77,10 @@ body {
     color: #e5f2c9;
 }
 
+/* index.html CSS Properties */
 .empty {
     display: flex;
 }
-
 
 .empty p {
     font-size: 80px;
@@ -95,6 +96,7 @@ body {
     margin-left: 6rem;
 }
 
+/* add_session.html CSS Properties */
 .add-form {
     background: #3c593f;
     padding: 2rem 3rem 2rem 2.7rem;
@@ -114,6 +116,7 @@ form div {
     display: grid;
 }
 
+/* Shared — Base element styles */
 input {
     border-radius: 10px;
     background: #EAE2B7;
@@ -175,6 +178,7 @@ textarea {
     background: #e7f2cb;
 }
 
+/* Shared — Base element styles */
 button {
     background: #e7f2cb;
     padding: 1rem;
@@ -197,6 +201,7 @@ button:hover {
     color: #EAE2B7;
 }
 
+/* Index.html CSS Properties (Session-Cards */
 .session {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -285,6 +290,7 @@ button:hover {
     margin-top: -1rem;
 }
 
+/* delete_session.html CSS Properties */
 .confirm {
     border: 5px solid white;
     background: #3c593f;
