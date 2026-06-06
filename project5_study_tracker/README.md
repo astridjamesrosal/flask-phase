@@ -25,7 +25,7 @@
 - We could also add a Table showing Productivity Chart based on the previous Productivity Ratings
 
 # Preview
-![Empty Main Hub](Pando_Empty-Main-Hub.jpg)
-![Main Hub](Pando_Main-Hub.jpg)
-![Adding A Session](Pando_Add-Session.jpg)
-![Delete Session Confirmation](Pando_Confirm-Delete.jpg)
+![Empty Main Hub](static/Pando_Empty-Main-Hub.jpg)
+![Main Hub](static/Pando_Main-Hub.jpg)
+![Adding A Session](static/Pando_Add-Session.jpg)
+![Delete Session Confirmation](static/Pando_Confirm-Delete.jpg)
