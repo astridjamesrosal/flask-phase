@@ -32,9 +32,14 @@ def edit_account(account_id, name, account_type):
     connection = sqlite3.connect('finance_tracker.db')
     cursor = connection.cursor()
     cursor.execute("UPDATE Accounts SET name = ?, account_type = ? WHERE account_id = ?", (name, account_type, account_id))
+    rows_affected = cursor.rowcount
     connection.commit()
     connection.close()
-    return True
+    if rows_affected == 0:
+        return False
+    else:
+        return True
+    
 
 def delete_account(account_id):
     connection = sqlite3.connect('finance_tracker.db')
