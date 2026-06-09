@@ -21,7 +21,7 @@ def init_db():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS Transactions (
             transaction_id INTEGER PRIMARY KEY,
-            Date TEXT,
+            date TEXT,
             account_id INTEGER REFERENCES Accounts(account_id),
             category_id INTEGER REFERENCES Categories(category_id),
             transaction_type TEXT,
