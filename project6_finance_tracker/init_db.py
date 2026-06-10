@@ -22,10 +22,12 @@ def init_db():
         CREATE TABLE IF NOT EXISTS Transactions (
             transaction_id INTEGER PRIMARY KEY,
             date TEXT,
-            account_id INTEGER REFERENCES Accounts(account_id),
+            account_id INTEGER,
+            FOREIGN KEY (account_id) REFERENCES Accounts(account_id)
             category_id INTEGER REFERENCES Categories(category_id),
             transaction_type TEXT,
             amount FLOAT 
+            description TEXT
         )
         """)
     connection.commit()

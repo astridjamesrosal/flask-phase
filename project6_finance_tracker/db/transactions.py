@@ -1,9 +1,9 @@
 import sqlite3
 
-def create_transaction(date, account_id, category_id, transaction_type, amount):
+def create_transaction(date, account_id, category_id, transaction_type, amount, description):
     connection = sqlite3.connect('finance_tracker.db')
     cursor = connection.cursor()
-    cursor.execute("INSERT INTO Transactions (date, account_id, category_id, transaction_type, amount) VALUES (?, ?, ?, ?, ?)", (date, account_id, category_id, transaction_type, amount))
+    cursor.execute("INSERT INTO Transactions (date, account_id, category_id, transaction_type, amount, description) VALUES (?, ?, ?, ?, ?, ?)", (date, account_id, category_id, transaction_type, amount, description))
     rows_affected = cursor.rowcount
     connection.commit()
     connection.close()
@@ -15,7 +15,7 @@ def create_transaction(date, account_id, category_id, transaction_type, amount):
 def get_all_transactions():
     connection = sqlite3.connect('finance_tracker.db')
     cursor = connection.cursor()
-    cursor.execute("SELECT transaction_id, date, account_id, category_id, transaction_type, amount FROM Transactions")
+    cursor.execute("SELECT transaction_id, date, account_id, category_id, transaction_type, amount, description FROM Transactions")
     transactions_list = cursor.fetchall()
     connection.close()
     return transactions_list
@@ -23,7 +23,7 @@ def get_all_transactions():
 def get_transaction(transaction_id):
     connection = sqlite3.connect('finance_tracker.db')
     cursor = connection.cursor()
-    cursor.execute("SELECT transaction_id, date, account_id, category_id, transaction_type, amount FROM Transactions WHERE transaction_id = ?", (transaction_id,))
+    cursor.execute("SELECT transaction_id, date, account_id, category_id, transaction_type, amount, description FROM Transactions WHERE transaction_id = ?", (transaction_id,))
     single_transaction = cursor.fetchone()
     connection.close()
     return single_transaction
@@ -31,7 +31,7 @@ def get_transaction(transaction_id):
 def get_transactions_by_filter(transaction_type, category_id):
     connection = sqlite3.connect('finance_tracker.db')
     cursor = connection.cursor()
-    base_query = "SELECT transaction_id, date, account_id, transaction_type, category_id, amount FROM Transactions"
+    base_query = "SELECT transaction_id, date, account_id, transaction_type, category_id, amount, description FROM Transactions"
     conditions = []
     values = []
     if transaction_type is not None:
@@ -48,10 +48,10 @@ def get_transactions_by_filter(transaction_type, category_id):
     connection.close()
     return results
 
-def edit_transaction(transaction_id, category_id, transaction_type, amount):
+def edit_transaction(transaction_id, category_id, transaction_type, amount, description):
     connection = sqlite3.connect('finance_tracker.db')
     cursor = connection.cursor()
-    cursor.execute("UPDATE Transactions SET category_id = ?, transaction_type = ?, amount = ? WHERE transaction_id = ?", (category_id, transaction_type, amount, transaction_id))
+    cursor.execute("UPDATE Transactions SET category_id = ?, transaction_type = ?, amount = ?, description = ? WHERE transaction_id = ?", (category_id, transaction_type, amount, description, transaction_id))
     rows_affected = cursor.rowcount
     connection.commit()
     connection.close()
