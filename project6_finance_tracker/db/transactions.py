@@ -12,6 +12,22 @@ def create_transaction(date, account_id, category_id, transaction_type, amount, 
     else:
         return True
 
+def get_total_income():
+    connection = sqlite3.connect('finance_tracker.db')
+    cursor = connection.cursor()
+    cursor.execute("SELECT SUM (amount) FROM Transactions WHERE transaction_type = 'income'")
+    total_income = cursor.fetchone()
+    connection.close()
+    return total_income
+
+def get_total_expense():
+    connection = sqlite3.connect('finance_tracker.db')
+    cursor = connection.cursor()
+    cursor.execute("SELECT SUM (amount) FROM Transactions WHERE transaction_type = 'expense'")
+    total_expense = cursor.fetchone()
+    connection.close()
+    return total_expense
+
 def get_all_transactions():
     connection = sqlite3.connect('finance_tracker.db')
     cursor = connection.cursor()
