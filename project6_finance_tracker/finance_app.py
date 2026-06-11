@@ -53,5 +53,41 @@ def delete_account_route(account_id):
         flash("Unsuccessful Account Deletion")
         return redirect(url_for('accounts_list_route'))
 
+@app.route('/categories', methods=['GET'])
+def categories_list_route():
+    categories_list = get_all_categories()
+    return render_template('categories.html', categories_list=categories_list)
+
+@app.route('/categories/create', methods=['POST'])
+def create_category_route():
+    category_name = request.form['category_name']
+    result = create_category(category_name)
+    if result:
+        return redirect(url_for('categories_list_route'))
+    else:
+        flash("Unsuccessful Category Creation")
+        return redirect(url_for('categories_list_route'))
+
+@app.route('/categories/<category_id>/edit', methods=['POST'])
+def edit_category_route(category_id):
+    category_id = int(category_id)
+    category_name = request.form['category_name']
+    result = edit_category(category_id, category_name)
+    if result:
+        return redirect(url_for('categories_list_route'))
+    else:
+        flash("Unsuccessful Category Edit")
+        return redirect(url_for('categories_list_route'))
+
+@app.route('/categories/<category_id>/delete', methods=['POST'])
+def delete_category_route(category_id):
+    category_id = int(category_id)
+    result = delete_category(category_id)
+    if result:
+        return redirect(url_for('categories_list_route'))
+    else:
+        flash("Unsuccessful Category Deletion")
+        return redirect(url_for('categories_list_route'))
+
 if __name__ == '__main__': 
     app.run(debug=True)
