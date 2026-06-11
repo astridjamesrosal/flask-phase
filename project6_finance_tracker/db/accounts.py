@@ -39,7 +39,6 @@ def edit_account(account_id, name, account_type):
         return False
     else:
         return True
-    
 
 def delete_account(account_id):
     connection = sqlite3.connect('finance_tracker.db')
