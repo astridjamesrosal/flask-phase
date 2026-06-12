@@ -89,5 +89,62 @@ def delete_category_route(category_id):
         flash("Unsuccessful Category Deletion")
         return redirect(url_for('categories_list_route'))
 
+@app.route('/transactions', methods=['GET'])
+def transactions_list_route():
+    transaction_type = request.args.get('transaction_type')
+    category_id = request.args.get('category_id')
+    if 'transaction_type' in request.args or 'category_id' in request.args:
+        if category_id is not None:
+            category_id = int(category_id)
+        transactions_list = get_transactions_by_filter(transaction_type, category_id)
+        return render_template('transactions.html', transactions_list=transactions_list)
+    else:
+        transactions_list = get_all_transactions()
+        return render_template('transactions.html', transactions_list=transactions_list)
+
+@app.route('/transactions/create', methods=['POST'])
+def create_transaction_route():
+    date = request.form['date']
+    account_id = request.form['account_id']
+    category_id = request.form['category_id']
+    transaction_type = request.form['transaction_type']
+    amount = request.form['amount']
+    description = request.form['description']
+    account_id = int(account_id)
+    category_id = int(category_id)
+    amount = float(amount)
+    result = create_transaction(date, account_id, category_id, transaction_type, amount, description)
+    if result:
+        return redirect(url_for('transactions_list_route'))
+    else:
+        flash("Unsuccessful Transaction")
+        return redirect(url_for('transactions_list_route'))
+    
+@app.route('/transactions/<transaction_id>/edit', methods=['POST'])
+def edit_transaction_route(transaction_id):
+    category_id = request.form['category_id']
+    transaction_type = request.form['transaction_type']
+    amount = request.form['amount']
+    description = request.form['description']
+    transaction_id = int(transaction_id)
+    category_id = int(category_id)
+    amount = float(amount)
+    result = edit_transaction(transaction_id, category_id, transaction_type, amount, description)
+    if result:
+        return redirect(url_for('transactions_list_route'))
+    else:
+        flash("Unsuccessful Transaction Edit")
+        return redirect(url_for('transactions_list_route'))
+
+@app.route('/transactions/<transaction_id>/delete', methods=['POST'])
+def delete_transaction_route(transaction_id):
+    transaction_id = int(transaction_id)
+    result = delete_transaction(transaction_id)
+    if result:
+        return redirect(url_for('transactions_list_route'))
+    else:
+        flash("Unsuccessful Transaction")
+        return redirect(url_for('transactions_list_route'))
+
 if __name__ == '__main__': 
     app.run(debug=True)
