@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+        {% if transaction_list %}
+        <div class="upper_main_page">
+            <div class="box_income">
+                <div class="amount">
+                    <p>Php</p>
+                    <p>{{ total_income }}</p>
+                </div>
+                <p>Total Income</p>
+            </div>
+            <div class="box_expense">
+                <p>Total Expense</p>
+                <div class="amount">
+                    <p>Php</p>
+                    <p>{{ total_expense }}</p>
+                </div>
+            </div>
+            <img src="{{ url_for('static', filename='images/balance_owl.jpg') }}" alt="owl">
+            <p class="balance_text">Your Balance!</p>
+            <div class="box_balance">
+                <div class="amount">
+                    <p>Php</p>
+                    <p>{{ balance }}</p>
+                </div>
+                <a href="{{ url_for('transactions_list_route') }}">Add Transaction</a>
+            </div>
+        </div>
+        <div class="lower_main_page">
+            <div class="transaction_table">
+        {% for transaction in transaction_list %}
+                <div class="transaction_box">
+                    <p class="transaction_id">{{ transaction[0] }}</p>
+                    <p class="date">{{ transaction[1] }}</p>
+                    <p class="transaction_type">{{ transaction[4] }}</p>
+                    <p class="category_id">{{ transaction[3] }}</p>
+                    <p class="description">{{ transaction[6] }}</p>
+                    <p class="account_id">{{ transaction[2] }}</p>
+                    <p class="amount">{{ transaction[5] }}</p>
+                    <p class="arrow">
+                        {% if transaction[4] == 'income' %}
+                            ↑
+                        {% else %}
+                            ↓
+                        {% endif %}
+                    </p>
+                </div>
+        {% endfor %}
+            </div>
+        </div>
+
+        {% else %}
+        <div class="upper_empty_main_page">
+            <div class="empty_box_income">
+                <div class="empty_amount">
+                    <p>Php</p>
+                    <p>0.00</p>
+                </div>
+                <p>Total Income</p>
+            </div>
+            <div class="empty_box_expense">
+                <p>Total Expense</p>
+                <div class="empty_amount">
+                    <p>Php</p>
+                    <p>0.00</p>
+                </div>
+            </div>
+            <div class="empty_box_balance">
+                <div class="empty_amount">
+                    <p>Php</p>
+                    <p>0.00</p>
+                </div>
+                <p>Your Balance</p>
+            </div>
+        </div>
+        <div class="lower_empty_main_page">
+            <img src="{{ url_for('static', filename='images/sleeping_owl.jpg') }}" alt="owl">
+            <p class="empty_header">Ready when you are</p>
+            <p class="empty_main_body">Your dashboard is a clean slate. Once you add your current balance, budget, or first transaction, your owl will wake up to help you track your habits and insights.</p>
+            <a href="{{ url_for('transactions_list_route') }}">Add Transaction</a>
+        </div>
+    {% endif %}
+    {% endblock %}
