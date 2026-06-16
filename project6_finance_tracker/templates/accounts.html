@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+        {% if accounts_list %}
+
+        <div class="upper_accounts_page">
+            <div class="upper_message">
+                <img src="{{ url_for('static', filename='images/header_owl.jpg')}}" alt="owl">
+                <p class="upper_message_text">Get a clear view of your money by linking your accounts</p>
+                <a href="#">Add Account</a>
+            </div>
+        </div>
+        <div class="lower_accounts_page">
+            <div class="lower_accounts_page_table">
+                <table>
+                    <tr>
+                        <th>Account Name</th>
+                        <th>Account Type</th>
+                        <th>Actions</th>
+                    </tr>
+                    {% for account in accounts_list %}
+                    <tr>
+                        <th>{{ account[1] }}</th>
+                        <th>{{ account[2] }}</th>
+                        <th>
+                            <div class="edit_account">Edit</div>
+                            <img src="{{ url_for('static', filename='images/delete.png')}}" href="{{url_for('delete_account_route')}}">
+                        </th>
+                    </tr>
+                {% endfor %}
+                </table>
+            </div>
+        </div>
+
+        {% else %}
+        <div class="empty_accounts_page">
+            <img src="{{ url_for('static', filename='images/accounts_owl.jpg') }}" alt="owl">
+            <p class="empty_header">Let's Set Up Your Accounts</p>
+            <p class="empty_main_body">You’re just one step away. Connect your first account to start tracking your spending, setting budgets, and taking control of your wealth.</p>
+            <a href="{{ url_for('accounts_list_route') }}">Add Your First Account</a>
+        </div>
+    {% endif %}
+    {% endblock %}

@@ -2,6 +2,7 @@
 
     {% block content %}
         {% if transaction_list %}
+
         <div class="upper_main_page">
             <div class="box_income">
                 <div class="amount">
@@ -27,9 +28,12 @@
                 <a href="{{ url_for('transactions_list_route') }}">Add Transaction</a>
             </div>
         </div>
+
         <div class="lower_main_page">
             <div class="transaction_table">
+
         {% for transaction in transaction_list %}
+
                 <div class="transaction_box">
                     <p class="transaction_id">{{ transaction[0] }}</p>
                     <p class="date">{{ transaction[1] }}</p>
@@ -46,11 +50,14 @@
                         {% endif %}
                     </p>
                 </div>
+
         {% endfor %}
+
             </div>
         </div>
 
         {% else %}
+
         <div class="upper_empty_main_page">
             <div class="empty_box_income">
                 <div class="empty_amount">
@@ -80,5 +87,6 @@
             <p class="empty_main_body">Your dashboard is a clean slate. Once you add your current balance, budget, or first transaction, your owl will wake up to help you track your habits and insights.</p>
             <a href="{{ url_for('transactions_list_route') }}">Add Transaction</a>
         </div>
+        
     {% endif %}
     {% endblock %}
