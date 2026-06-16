@@ -23,7 +23,19 @@
                         <th>{{ account[1] }}</th>
                         <th>{{ account[2] }}</th>
                         <th>
-                            <div class="edit_account">Edit</div>
+                            <form action="{{ url_for('edit_account_route', account_id=account[0]) }}" method="POST">
+                                <label>Account Name:</label>
+                                <input type="text" name="name" value="{{ account[1] }}">
+                                <label>Account Type:</label>
+                                <select name="account_type" value="{{ account[2] }}">
+                                    <option value="">Choose an Account Type</option>
+                                    <option value="Cash" {% if account[2] == 'Cash' %}selected{% endif %}>Cash</option>
+                                    <option value="E-wallet" {% if account[2] == 'E-wallet' %}selected{% endif %}>E-wallet</option>
+                                    <option value="Bank" {% if account[2] == 'Bank' %}selected{% endif %}>Bank</option>
+                                    <option value="Credit Card" {% if account[2] == 'Credit Card' %}selected{% endif %}>Credit Card</option>
+                                </select>
+                                <button type="submit">Update</button>
+                            </form>
                             <img src="{{ url_for('static', filename='images/delete.png')}}" href="{{url_for('delete_account_route')}}">
                         </th>
                     </tr>
