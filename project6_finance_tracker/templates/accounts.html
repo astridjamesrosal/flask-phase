@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
     {% block content %}
         {% if accounts_list %}
 
@@ -41,7 +40,7 @@
                     </tr>
                     <div class="modal" id="deleteAccountModal-{{ account[0] }}">
                         <form action="{{ url_for('delete_account_route', account_id=account[0]) }}" method="POST">
-                            <p>Are you sure you want to delete Account: {{ account[1] }}</p>
+                            <p class="delete_message">Are you sure you want to delete Account: {{ account[1] }}</p>
                             <button type="button" onclick="hideDeleteModal()">No, Go Back</button>
                             <button type="submit">Yes, Delete</button>
                         </form>
@@ -68,7 +67,7 @@
         </div>
 
         {% else %}
-        <div class="empty_accounts_page">
+        <div class="empty_page">
             <img src="{{ url_for('static', filename='images/accounts_owl.jpg') }}" alt="owl">
             <p class="empty_header">Let's Set Up Your Accounts</p>
             <p class="empty_main_body">You’re just one step away. Connect your first account to start tracking your spending, setting budgets, and taking control of your wealth.</p>
