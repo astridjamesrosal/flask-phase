@@ -6,7 +6,7 @@
             <div class="upper_message">
                 <img src="{{ url_for('static', filename='images/header_owl.jpg')}}" alt="owl">
                 <p class="upper_message_text">Get a clear view of your money by linking your accounts</p>
-                <a href="#">Add Account</a>
+                <a href="#" onclick="showModal('createAccountModal')">Add Account</a>
             </div>
         </div>
         <div class="lower_accounts_page">
@@ -19,33 +19,40 @@
                     </tr>
                     {% for account in accounts_list %}
                     <tr>
-                        <th>{{ account[1] }}</th>
-                        <th>{{ account[2] }}</th>
-                        <th>
-                            <form action="{{ url_for('edit_account_route', account_id=account[0]) }}" method="POST">
-                                <label>Account Name:</label>
-                                <input type="text" name="name" value="{{ account[1] }}">
-                                <label>Account Type:</label>
-                                <select name="account_type" value="{{ account[2] }}">
-                                    <option value="">Choose an Account Type</option>
-                                    <option value="Cash" {% if account[2] == 'Cash' %}selected{% endif %}>Cash</option>
-                                    <option value="E-wallet" {% if account[2] == 'E-wallet' %}selected{% endif %}>E-wallet</option>
-                                    <option value="Bank" {% if account[2] == 'Bank' %}selected{% endif %}>Bank</option>
-                                    <option value="Credit Card" {% if account[2] == 'Credit Card' %}selected{% endif %}>Credit Card</option>
-                                </select>
-                                <button type="submit">Update</button>
-                            </form>
-                            <img src="{{ url_for('static', filename='images/delete.png')}}" href="{{url_for('delete_account_route')}}">
-                        </th>
+                        <td>{{ account[1] }}</td>
+                        <td>{{ account[2] }}</td>
+                        <td>
+                            <img src="{{ url_for('static', filename='images/edit.jpg')}}" href="{{url_for('edit_account_route')}}" onclick="showModal('editAccountModal-{{ account[0] }}')">
+                            <img src="{{ url_for('static', filename='images/delete.png')}}" href="{{url_for('delete_account_route')}}" onclick="showModal('deleteAccountModal-{{ account[0] }}')">
+                        </td>
                     </tr>
+
+                    <div class="modal" id="editAccountModal-{{ account[0] }}">
+                        <form action="{{ url_for('edit_account_route', account_id=account[0]) }}" method="POST">
+                            <label>Account Name:</label>
+                            <input type="text" name="name" value="{{ account[1] }}">
+                            <label>Account Type:</label>
+                            <select name="account_type" value="{{ account[2] }}">
+                                <option value="">Choose an Account Type</option>
+                                <option value="Cash" {% if account[2] == 'Cash' %}selected{% endif %}>Cash</option>
+                                <option value="E-wallet" {% if account[2] == 'E-wallet' %}selected{% endif %}>E-wallet</option>
+                                <option value="Bank" {% if account[2] == 'Bank' %}selected{% endif %}>Bank</option>
+                                <option value="Credit Card" {% if account[2] == 'Credit Card' %}selected{% endif %}>Credit Card</option>
+                            </select>
+                            <button type="button" onclick="hideModal('editAccountModal-{{ account[0] }}')">Cancel</button>
+                            <button type="submit">Update</button>
+                        </form>
+                    </div>
+
                     <div class="modal" id="deleteAccountModal-{{ account[0] }}">
                         <form action="{{ url_for('delete_account_route', account_id=account[0]) }}" method="POST">
                             <p class="delete_message">Are you sure you want to delete Account: {{ account[1] }}</p>
-                            <button type="button" onclick="hideDeleteModal()">No, Go Back</button>
+                            <button type="button" onclick="hideModal('deleteAccountModal-{{ account[0] }}')">No, Go Back</button>
                             <button type="submit">Yes, Delete</button>
                         </form>
                     </div>
                     {% endfor %}
+
                 </table>
             </div>
         </div>
@@ -63,6 +70,7 @@
                     <option value="Credit Card">Credit Card</option>
                 </select>
                 <button type="submit">Create</button>
+                <button type="button" onclick="hideModal('createAccountModal')">Cancel</button>
             </form>
         </div>
 

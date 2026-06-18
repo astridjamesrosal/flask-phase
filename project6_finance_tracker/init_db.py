@@ -26,7 +26,7 @@ def init_db():
             FOREIGN KEY (account_id) REFERENCES Accounts(account_id)
             category_id INTEGER REFERENCES Categories(category_id),
             transaction_type TEXT,
-            amount FLOAT 
+            amount FLOAT,
             description TEXT
         )
         """)
