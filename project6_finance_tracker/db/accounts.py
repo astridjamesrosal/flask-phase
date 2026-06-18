@@ -15,7 +15,7 @@ def create_account(name, account_type):
 def get_all_accounts():
     connection = sqlite3.connect('finance_tracker.db')
     cursor = connection.cursor()
-    cursor.execute("SELECT account_id, name, account_type, is_active FROM Accounts")
+    cursor.execute("SELECT account_id, name, account_type, is_active FROM Accounts WHERE is_active = 1")
     accounts_list = cursor.fetchall()
     connection.close()
     return accounts_list

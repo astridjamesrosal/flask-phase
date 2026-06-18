@@ -13,7 +13,9 @@ def index():
     total_expense = get_total_expense()[0] or 0
     balance = total_income - total_expense
     transaction_list = get_all_transactions()
-    return render_template('index.html', total_income=total_income, total_expense=total_expense, balance=balance, transaction_list=transaction_list)
+    accounts_list = get_all_accounts()
+    categories_list = get_all_categories()
+    return render_template('index.html', total_income=total_income, total_expense=total_expense, balance=balance, transaction_list=transaction_list, accounts_list=accounts_list, categories_list=categories_list)
 
 @app.route('/accounts', methods=['GET'])
 def accounts_list_route():
@@ -100,14 +102,16 @@ def delete_category_route(category_id):
 def transactions_list_route():
     transaction_type = request.args.get('transaction_type')
     category_id = request.args.get('category_id')
+    accounts_list = get_all_accounts()
+    categories_list = get_all_categories()
     if 'transaction_type' in request.args or 'category_id' in request.args:
         if category_id is not None:
             category_id = int(category_id)
         transactions_list = get_transactions_by_filter(transaction_type, category_id)
-        return render_template('transactions.html', transactions_list=transactions_list)
+        return render_template('transactions.html', transactions_list=transactions_list, accounts_list=accounts_list, categories_list=categories_list)
     else:
         transactions_list = get_all_transactions()
-        return render_template('transactions.html', transactions_list=transactions_list)
+        return render_template('transactions.html', transactions_list=transactions_list, accounts_list=accounts_list, categories_list=categories_list)
 
 @app.route('/transactions/create', methods=['POST'])
 def create_transaction_route():

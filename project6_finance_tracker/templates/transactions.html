@@ -31,8 +31,13 @@
             </div>
             <div class="modal" id="editTransactionModal-{{ transaction[0] }}">
                 <form action="{{ url_for('edit_transaction_route', transaction_id=transaction[0]) }}" method="POST">
-                    <label>Category ID:</label>
-                    <input type="text" name="category_id" value="{{ transaction[3] }}">
+                    <label>Category:</label>
+                    <select name="category_id">
+                        <option value="">Choose a Category</option>
+                        {% for category in categories_list %}
+                            <option value="{{ category[0] }}" {% if category[0] == transaction[3] %}selected{% endif %}>{{ category[1] }}</option>
+                        {% endfor %}
+                    </select>
                     <label>Amount:</label>
                     <input type="number" name="amount" value="{{ transaction[5] }}">
                     <label>Transaction Type:</label>
@@ -69,10 +74,20 @@
                 <p>Create a new Transaction!</p>
                     <label>Date:</label>
                     <input type="date" name="date">
-                    <label>Account ID:</label>
-                    <input type="text" name="account_id">
-                    <label>Category ID:</label>
-                    <input type="text" name="category_id">
+                    <label>Account:</label>
+                    <select name="account_id">
+                        <option value="">Choose an Account</option>
+                        {% for account in accounts_list %}
+                            <option value="{{ account[0] }}">{{ account[1] }}</option>
+                        {% endfor %}
+                    </select>
+                    <label>Category:</label>
+                    <select name="category_id">
+                        <option value="">Choose a Category</option>
+                        {% for category in categories_list %}
+                            <option value="{{ category[0] }}">{{ category[1] }}</option>
+                        {% endfor %}
+                    </select>
                     <label>Amount:</label>
                     <input type="number" name="amount">
                     <label>Transaction Type:</label>

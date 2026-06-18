@@ -15,7 +15,7 @@ def create_category(category_name):
 def get_all_categories():
     connection = sqlite3.connect('finance_tracker.db')
     cursor = connection.cursor()
-    cursor.execute ("SELECT category_id, category_name, is_active FROM Categories")
+    cursor.execute("SELECT category_id, category_name, is_active FROM Categories WHERE is_active = 1")
     category_list = cursor.fetchall()
     connection.close()
     return category_list
