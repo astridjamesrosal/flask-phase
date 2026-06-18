@@ -15,8 +15,8 @@
             <div class="transaction_box">
                 <p class="transaction_date">{{ transaction[1] }}</p>
                 <p class="transaction_type">{{ transaction[4] }}</p>
-                <p class="transaction_category">{{ transaction[3] }}</p>
-                <p class="transaction_account">{{ transaction[2] }}</p>
+                <p class="transaction_category">{{ transaction[8] }}</p>
+                <p class="transaction_account">{{ transaction[7] }}</p>
                 <textarea class="transaction_description">{{ transaction[6] }}</textarea>
                 <p class="transaction_amount">{{ transaction[5] }}</p>
                 <img src="{{ url_for('static', filename='images/Edit.jpg')}}" href="{{url_for('edit_transaction_route')}}" onclick="showModal('editTransactionModal-{{ transaction[0] }}')">

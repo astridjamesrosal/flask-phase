@@ -31,7 +31,7 @@ def get_total_expense():
 def get_all_transactions():
     connection = sqlite3.connect('finance_tracker.db')
     cursor = connection.cursor()
-    cursor.execute("SELECT transaction_id, date, account_id, category_id, transaction_type, amount, description FROM Transactions")
+    cursor.execute("SELECT Transactions.*, Accounts.name, Categories.category_name FROM Transactions JOIN Accounts ON Transactions.account_id = Accounts.account_id JOIN Categories ON Transactions.category_id = Categories.category_id")
     transactions_list = cursor.fetchall()
     connection.close()
     return transactions_list
@@ -39,7 +39,7 @@ def get_all_transactions():
 def get_transaction(transaction_id):
     connection = sqlite3.connect('finance_tracker.db')
     cursor = connection.cursor()
-    cursor.execute("SELECT transaction_id, date, account_id, category_id, transaction_type, amount, description FROM Transactions WHERE transaction_id = ?", (transaction_id,))
+    cursor.execute("SELECT Transactions.*, Accounts.name, Categories.category_name FROM Transactions JOIN Accounts ON Transactions.account_id = Accounts.account_id JOIN Categories ON Transactions.category_id = Categories.category_id WHERE transaction_id = ?", (transaction_id,))
     single_transaction = cursor.fetchone()
     connection.close()
     return single_transaction
@@ -47,7 +47,7 @@ def get_transaction(transaction_id):
 def get_transactions_by_filter(transaction_type, category_id):
     connection = sqlite3.connect('finance_tracker.db')
     cursor = connection.cursor()
-    base_query = "SELECT transaction_id, date, account_id, transaction_type, category_id, amount, description FROM Transactions"
+    base_query = "SELECT Transactions.*, Accounts.name, Categories.category_name FROM Transactions JOIN Accounts ON Transactions.account_id = Accounts.account_id JOIN Categories ON Transactions.category_id = Categories.category_id"
     conditions = []
     values = []
     if transaction_type is not None:
