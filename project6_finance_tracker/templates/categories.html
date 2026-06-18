@@ -6,46 +6,34 @@
             <div class="upper_message">
                 <img src="{{ url_for('static', filename='images/header_owl.jpg')}}" alt="owl">
                 <p class="upper_message_text">Uncover your spending patterns and take charge of your cash flow.</p>
-                <a href="#">Add Category</a>
+                <a href="#" onclick="showModal('createCategoryModal')">Add Category</a>
             </div>
         </div>
+
         <div class="lower_categories_page">
             <p class="lower_categories_text">Select a category to see exactly where your money went.</p>
             {% for category in categories_list %}
-            <div class="categories_box"><a href="{{ url_for('transactions_list_route', category_id=category[0])}}">{{ category[1] }}</a></div>
+            <div class="categories_box"><a href="{{ url_for('view_category_route', category_id=category[0])}}">{{ category[1] }}</a></div>
         
-            <div class="modal" id="editCategoryModal-{{ category[0] }}">
-                <form action="{{ url_for('edit_category_route', category_id=category[0]) }}" method="POST">
-                    <label>Category Name:</label>
-                    <input type="text" name="category_name" value="{{ category[1] }}">
-                    <button type="submit">Update</button>
-                </form>
-            </div>
-            <div class="modal" id="deleteCategoryModal-{{ category[0] }}">
-                <form action="{{ url_for('delete_category_route', category_id=category[0]) }}" method="POST">
-                    <p class="delete_message">Are you sure you want to delete Category:{{ category[1] }}</p>
-                    <button type="button" onclick="hideDeleteModal()">No, Go Back</button>
-                    <button type="submit">Yes, Delete</button>
-                </form>
-            </div>
         {% endfor %}
-        </div>
-        <div class="modal" id="createCategoryModal">
-            <form action="{{ url_for('create_category_route') }}" method="POST">
-                <p>Create a new Category!</p>
-                <label>Category Name:</label>
-                <input type="text" name="category_name" placeholder="Food, School, Savings, etc.">
-                <button type="submit">Create</button>
-            </form>
         </div>
         {% else %}
         <div class="empty_page">
             <img src="{{ url_for('static', filename='images/categories_owl.jpg') }}" alt="owl">
             <p class="empty_header">Give Your Money a Mission!</p>
             <p class="empty_main_body">Stop playing the guessing game with your expenses. Group your transactions into custom buckets right now to design a personalized blueprint that lets you spend guilt-free on the things you love.</p>
-            <a href="{{ url_for('categories_list_route') }}">Add Your First Category</a>
+            <a href="#" onclick="showModal('createCategoryModal')">Add Your First Category</a>
         </div>
         {% endif %}
+        <div class="modal" id="createCategoryModal">
+            <form action="{{ url_for('create_category_route') }}" method="POST">
+                <p>Create a new Category!</p>
+                <label>Category Name:</label>
+                <input type="text" name="category_name" placeholder="Food, School, Savings, etc.">
+                <button type="button" onclick="hideModal('createCategoryModal')">Cancel</button>
+                <button type="submit">Create</button>
+            </form>
+        </div>
     {% endblock %}
 
 

@@ -78,7 +78,14 @@ def edit_category_route(category_id):
     else:
         flash("Unsuccessful Category Edit")
         return redirect(url_for('categories_list_route'))
-
+    
+@app.route('/categories/<category_id>/', methods=['GET'])
+def view_category_route(category_id):
+    category_id = int(category_id)
+    category_name = get_category(category_id)
+    category_transactions = get_transactions_by_filter(None, category_id)
+    return render_template('view_category.html', category_name=category_name, category_transactions=category_transactions)
+    
 @app.route('/categories/<category_id>/delete', methods=['POST'])
 def delete_category_route(category_id):
     category_id = int(category_id)

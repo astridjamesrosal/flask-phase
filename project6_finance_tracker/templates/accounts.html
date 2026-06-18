@@ -9,6 +9,7 @@
                 <a href="#" onclick="showModal('createAccountModal')">Add Account</a>
             </div>
         </div>
+
         <div class="lower_accounts_page">
             <div class="lower_accounts_page_table">
                 <table>
@@ -22,7 +23,7 @@
                         <td>{{ account[1] }}</td>
                         <td>{{ account[2] }}</td>
                         <td>
-                            <img src="{{ url_for('static', filename='images/edit.jpg')}}" href="{{url_for('edit_account_route')}}" onclick="showModal('editAccountModal-{{ account[0] }}')">
+                            <img src="{{ url_for('static', filename='images/Edit.jpg')}}" href="{{url_for('edit_account_route')}}" onclick="showModal('editAccountModal-{{ account[0] }}')">
                             <img src="{{ url_for('static', filename='images/delete.png')}}" href="{{url_for('delete_account_route')}}" onclick="showModal('deleteAccountModal-{{ account[0] }}')">
                         </td>
                     </tr>
@@ -62,7 +63,7 @@
             <img src="{{ url_for('static', filename='images/accounts_owl.jpg') }}" alt="owl">
             <p class="empty_header">Let's Set Up Your Accounts</p>
             <p class="empty_main_body">You’re just one step away. Connect your first account to start tracking your spending, setting budgets, and taking control of your wealth.</p>
-            <a href="#"  onclick="showModal('createAccountModal')">Add Your First Account</a>
+            <a href="#" onclick="showModal('createAccountModal')">Add Your First Account</a>
         </div>
         {% endif %}
 
@@ -83,5 +84,5 @@
                 <button type="button" onclick="hideModal('createAccountModal')">Cancel</button>
             </form>
         </div>
-        
+
     {% endblock %}
