@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
     {% block content %}
         {% if transactions_list %}
+
         <div class="upper_page">
             <div class="upper_message">
                 <img src="{{ url_for('static', filename='images/header_owl.jpg')}}" alt="owl">
                 <p class="upper_message_text">Track your daily spending habits and watch your financial timeline grow.</p>
-                <a href="#">Add Transaction</a>
+                <a href="#" onclick="showModal('createTransactionModal')">Add Transaction</a>
             </div>
         </div>
+
         <div class="lower_transactions_page">
             {% for transaction in transactions_list %}
             <div class="transaction_box">
@@ -17,8 +19,8 @@
                 <p class="transaction_account">{{ transaction[2] }}</p>
                 <textarea class="transaction_description">{{ transaction[6] }}</textarea>
                 <p class="transaction_amount">{{ transaction[5] }}</p>
-                <img src="{{ url_for('static', filename='images/Edit.jpg')}}" alt="edit">
-                <img src="{{ url_for('static', filename='images/delete.png')}}" alt="delete">
+                <img src="{{ url_for('static', filename='images/Edit.jpg')}}" href="{{url_for('edit_transaction_route')}}" onclick="showModal('editTransactionModal-{{ transaction[0] }}')">
+                <img src="{{ url_for('static', filename='images/delete.png')}}" href="{{url_for('delete_transaction_route')}}" onclick="showModal('deleteTransactionModal-{{ transaction[0] }}')">
                 <div class="transaction_arrow">
                     {% if transaction[4] == 'income' %}
                             <div class="up_arrow">↑</div>
@@ -41,18 +43,27 @@
                     </select>
                     <label>Description:</label>
                     <textarea name="description">{{ transaction[6] }}</textarea>
+                    <button type="button" onclick="hideModal('editTransactionModal-{{ transaction[0] }}')">Cancel</button>
                     <button type="submit">Update</button>
                 </form>
             </div>
             <div class="modal" id="deleteTransactionModal-{{ transaction[0] }}">
                 <form action="{{ url_for('delete_transaction_route', transaction_id=transaction[0]) }}" method="POST">
                     <p class="delete_message">Are you sure you want to your transaction on:{{ transaction[1] }}</p>
-                    <button type="button" onclick="hideDeleteModal()">No, Go Back</button>
+                    <button type="button" onclick="hideModal('deleteTransactionModal-{{ transaction[0] }}')">No, Go Back</button>
                     <button type="submit">Yes, Delete</button>
                 </form>
             </div>
         {% endfor %}
         </div>
+        {% else %}
+        <div class="empty_page">
+            <img src="{{ url_for('static', filename='images/transactions_owl.jpg') }}" alt="owl">
+            <p class="empty_header">A Fresh Start for Your Funds</p>
+            <p class="empty_main_body">Your transaction list is currently a blank canvas. Start logging your spending today to gain the insights you need to master your money.</p>
+            <a href="#" onclick="showModal('createTransactionModal')">Add Your First Transaction</a>
+        </div>
+        {% endif %}
         <div class="modal" id="createTransactionModal">
             <form action="{{ url_for('create_transaction_route') }}" method="POST">
                 <p>Create a new Transaction!</p>
@@ -75,12 +86,4 @@
                 <button type="submit">Create</button>
             </form>
         </div>
-        {% else %}
-        <div class="empty_page">
-            <img src="{{ url_for('static', filename='images/transactions_owl.jpg') }}" alt="owl">
-            <p class="empty_header">A Fresh Start for Your Funds</p>
-            <p class="empty_main_body">Your transaction list is currently a blank canvas. Start logging your spending today to gain the insights you need to master your money.</p>
-            <a href="{{ url_for('transactions_list_route') }}">Add Your First Transaction</a>
-        </div>
-        {% endif %}
     {% endblock %}
