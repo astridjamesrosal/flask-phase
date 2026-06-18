@@ -56,6 +56,16 @@
                 </table>
             </div>
         </div>
+
+        {% else %}
+        <div class="empty_page">
+            <img src="{{ url_for('static', filename='images/accounts_owl.jpg') }}" alt="owl">
+            <p class="empty_header">Let's Set Up Your Accounts</p>
+            <p class="empty_main_body">You’re just one step away. Connect your first account to start tracking your spending, setting budgets, and taking control of your wealth.</p>
+            <a href="#"  onclick="showModal('createAccountModal')">Add Your First Account</a>
+        </div>
+        {% endif %}
+
         <div class="modal" id="createAccountModal">
             <form action="{{ url_for('create_account_route') }}" method="POST">
                 <p>Create a new Account!</p>
@@ -73,13 +83,5 @@
                 <button type="button" onclick="hideModal('createAccountModal')">Cancel</button>
             </form>
         </div>
-
-        {% else %}
-        <div class="empty_page">
-            <img src="{{ url_for('static', filename='images/accounts_owl.jpg') }}" alt="owl">
-            <p class="empty_header">Let's Set Up Your Accounts</p>
-            <p class="empty_main_body">You’re just one step away. Connect your first account to start tracking your spending, setting budgets, and taking control of your wealth.</p>
-            <a href="{{ url_for('accounts_list_route') }}">Add Your First Account</a>
-        </div>
-        {% endif %}
+        
     {% endblock %}
