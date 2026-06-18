@@ -31,7 +31,7 @@ def get_total_expense():
 def get_all_transactions():
     connection = sqlite3.connect('finance_tracker.db')
     cursor = connection.cursor()
-    cursor.execute("SELECT Transactions.*, Accounts.name, Categories.category_name FROM Transactions JOIN Accounts ON Transactions.account_id = Accounts.account_id JOIN Categories ON Transactions.category_id = Categories.category_id")
+    cursor.execute("SELECT Transactions.*, Accounts.name, Categories.category_name FROM Transactions JOIN Accounts ON Transactions.account_id = Accounts.account_id JOIN Categories ON Transactions.category_id = Categories.category_id ORDER BY date DESC")
     transactions_list = cursor.fetchall()
     connection.close()
     return transactions_list
@@ -58,6 +58,7 @@ def get_transactions_by_filter(transaction_type, category_id):
         values.append(category_id)
     if conditions:
         base_query += " WHERE " + " AND ".join(conditions)
+    base_query += " ORDER BY date DESC"
 
     cursor.execute(base_query, values)
     results = cursor.fetchall()

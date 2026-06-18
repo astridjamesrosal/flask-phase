@@ -7,6 +7,13 @@
                 <img src="{{ url_for('static', filename='images/header_owl.jpg')}}" alt="owl">
                 <p class="upper_message_text">Track your daily spending habits and watch your financial timeline grow.</p>
                 <a href="#" onclick="showModal('createTransactionModal')">Add Transaction</a>
+                <form method="GET" action="{{ url_for('transactions_list_route') }}">
+                    <select name="transaction_type" onchange="this.form.submit()">
+                        <option value="" {% if not request.args.get('transaction_type') %}selected{% endif %}>Both</option>
+                        <option value="income" {% if request.args.get('transaction_type') == 'income' %}selected{% endif %}>Income</option>
+                        <option value="expense" {% if request.args.get('transaction_type') == 'expense' %}selected{% endif %}>Expense</option>
+                    </select>
+                </form>
             </div>
         </div>
 
