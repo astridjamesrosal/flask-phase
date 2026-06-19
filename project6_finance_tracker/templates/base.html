@@ -32,12 +32,22 @@
 
     <script>
         function showModal(id) {
-            document.getElementById(id).style.display = "block";
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.style.display = "block";
+            }
         }
 
         function hideModal(id) {
-            document.getElementById(id).style.display = "none";
-        }   
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.style.display = "none";
+                const form = modal.querySelector('form');
+                if (form) {
+                    form.reset();
+                }
+            }
+        } 
     </script>
 </body>
 </html>
