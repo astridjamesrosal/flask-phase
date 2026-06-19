@@ -7,6 +7,75 @@
     --color-5: #0f0529;    
     --income-color: #2ecc71;
     --expense-color: #e74c3c;
-    --text-light: #ffffff;
+    --text-light: #f9f8fc;
     --text-dark: #1a1a2e;
+}
+
+body {
+    background: var(--bg-color);
+}
+
+.navbar {
+    background-color: var(--color-5);
+    padding: 1rem 2rem 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    font-family: 'Inter', sans-serif;
+    border-radius: 30px;
+    margin: 1.2rem auto;
+    width: 77rem;
+
+}
+
+.navbar-brand {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.navbar-brand img {
+    height: 2.5rem;
+    width: 2.5rem;
+    transition: transform 0.3s ease-in-out;
+}
+
+.navbar-brand img:hover {
+    transform: scale(1.5);
+}
+
+.navbar-brand .title {
+    color: #f9f8fc;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+    padding-right: 2rem;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.navbar-links a {
+    color: #f9f8fc;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 0.6rem 1rem 0.6rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.navbar-links a.active {
+    color: var(--bg-color);
+}
+
+.navbar-links a:hover {
+    transform: scale(1.2);
+    color: #f9f8fc;
 }

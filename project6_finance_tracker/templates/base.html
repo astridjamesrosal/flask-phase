@@ -8,13 +8,17 @@
 </head>
 <body>
 
-    <nav>
-        <ul>
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('accounts_list_route') }}">Accounts</a></li>
-            <li><a href="{{ url_for('categories_list_route') }}">Categories</a></li>
-            <li><a href="{{ url_for('transactions_list_route') }}">Transactions</a></li>
-        </ul>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <img src="{{ url_for('static', filename='images/orchid_logo.jpg')}}" alt="orchid">
+            <p class="title">ORCHID</p>
+        </div>
+        <div class="navbar-links">
+            <a href="{{ url_for('index') }}" class="{{ 'active' if request.endpoint == 'index' else '' }}">Home</a>
+            <a href="{{ url_for('accounts_list_route') }}" class="{{ 'active' if request.endpoint == 'accounts_list_route' else '' }}">Accounts</a>
+            <a href="{{ url_for('categories_list_route') }}" class="{{ 'active' if request.endpoint == 'categories_list_route' else '' }}">Categories</a>         
+            <a href="{{ url_for('transactions_list_route') }}" class="{{ 'active' if request.endpoint == 'transactions_list_route' else '' }}">Transactions</a>
+        </div>
     </nav>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
