@@ -57,35 +57,36 @@
         </div>
 
         {% else %}
-
+        
         <div class="upper_empty_main_page">
-            <div class="empty_box_income">
-                <div class="empty_amount">
-                    <p>Php</p>
-                    <p>0.00</p>
-                </div>
+            <div class="empty_box">
                 <p>Total Income</p>
+                <div class="empty_amount_income">
+                    <p>Php 0.00</p>
+                </div>
             </div>
-            <div class="empty_box_expense">
+            <div class="empty_box">
                 <p>Total Expense</p>
-                <div class="empty_amount">
-                    <p>Php</p>
-                    <p>0.00</p>
+                <div class="empty_amount_expense">
+                    <p>Php 0.00</p>
                 </div>
             </div>
             <div class="empty_box_balance">
-                <div class="empty_amount">
-                    <p>Php</p>
-                    <p>0.00</p>
-                </div>
                 <p>Your Balance</p>
+                <div class="empty_amount_balance">
+                    <p>Php 0.00</p>
+                </div>
             </div>
         </div>
         <div class="lower_empty_main_page">
             <img src="{{ url_for('static', filename='images/sleeping_owl.jpg') }}" alt="owl">
-            <p class="empty_header">Ready when you are</p>
-            <p class="empty_main_body">Your dashboard is a clean slate. Once you add your current balance, budget, or first transaction, your owl will wake up to help you track your habits and insights.</p>
-            <a href="#" onclick="showModal('createTransactionModal')">Add Transaction</a>
+            <div class="empty_main_message">
+                <p class="empty_header">Ready when you are</p>
+                <p class="empty_main_body">Your dashboard is a clean slate. 
+                    Once you add your current balance, budget, or first transaction, 
+                    your owl will wake up to help you track your habits and insights.</p>
+                <a href="#" onclick="showModal('createTransactionModal')">Add First Transaction</a>
+            </div>
         </div>
         
     {% endif %}

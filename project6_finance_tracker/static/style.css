@@ -11,6 +11,10 @@
     --text-dark: #1a1a2e;
 }
 
+* {
+    font-family: 'Inter';
+}
+
 body {
     background: var(--bg-color);
 }
@@ -26,7 +30,6 @@ body {
     border-radius: 30px;
     margin: 1.2rem auto;
     width: 77rem;
-
 }
 
 .navbar-brand {
@@ -39,11 +42,11 @@ body {
 .navbar-brand img {
     height: 2.5rem;
     width: 2.5rem;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.5s ease-in-out;
 }
 
 .navbar-brand img:hover {
-    transform: scale(1.5);
+    transform: scale(1.5) rotate(360deg);
 }
 
 .navbar-brand .title {
@@ -78,4 +81,112 @@ body {
 .navbar-links a:hover {
     transform: scale(1.2);
     color: #f9f8fc;
+}
+
+/* Empty Main Page */
+
+.upper_empty_main_page {
+    display: flex;
+    justify-content: space-between;
+}
+
+.empty_box, 
+.empty_box_balance {
+    display: flex;             
+    flex-direction: column;    
+    justify-content: center;   
+    align-items: center;      
+    width: 20rem;
+    height: 9rem;
+    box-sizing: border-box;    
+    font-family: 'Inter';
+    border-radius: 15px;
+    border: 5px solid var(--color-4);
+}
+
+.empty_box {
+    background-color: var(--text-light);
+}
+
+.empty_box_balance {
+    background-color: var(--color-4);
+    margin-right: 5rem;
+}
+
+.empty_box:first-of-type {
+    margin-left: 5rem;
+}
+
+.empty_box p {
+    margin: 0; 
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--color-4);
+}
+
+.empty_box_balance p {
+    margin: 0; 
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--text-light);
+}
+
+.empty_amount_income p {
+    font-weight: 600;
+    font-size: 3rem;
+    color: var(--income-color);
+    margin-top: 0.50rem;
+}
+
+.empty_amount_expense p {
+    font-weight: 600;
+    font-size: 3rem;
+    color: var(--expense-color);
+    margin-top: 0.50rem;
+}
+
+.empty_amount_balance p {
+    font-weight: 600;
+    font-size: 3rem;
+    color: var(--text-light);
+    margin-top: 0.50rem;
+}
+
+.lower_empty_main_page {
+    display: flex;
+    margin-left: 1rem;
+}
+
+.lower_empty_main_page img {
+    height: 20rem;
+    width: 15rem;
+    margin-left: 18rem;
+    margin-right: 2rem;
+    margin-top: 2rem;
+}
+
+.empty_header {
+    font-weight: 600;
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.empty_main_body {
+    max-width: 500px; 
+    text-align: center; 
+    line-height: 1.4;
+    font-size: 25px;
+    margin-bottom: 1.5rem; 
+}
+
+.empty_main_message a {
+    display: inline-block; 
+    text-decoration: none;
+    color: var(--text-light);
+    background-color: var(--color-3);
+    padding: 1rem 2rem;
+    font-size: 30px;
+    border-radius: 15px;
+    margin-left: 4rem; 
 }
