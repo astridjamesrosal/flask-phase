@@ -4,7 +4,7 @@
 
         <div class="upper_page">
             <div class="upper_message">
-                <img src="{{ url_for('static', filename='images/header_owl.jpg')}}" alt="owl">
+                <img src="{{ url_for('static', filename='images/header-owl.jpg')}}" alt="owl">
                 <p class="upper_message_text">Get a clear view of your money by linking your accounts</p>
                 <a href="#" onclick="showModal('createAccountModal')">Add Account</a>
             </div>
@@ -23,8 +23,8 @@
                         <td>{{ account[1] }}</td>
                         <td>{{ account[2] }}</td>
                         <td>
-                            <img src="{{ url_for('static', filename='images/Edit.jpg')}}" href="{{url_for('edit_account_route')}}" onclick="showModal('editAccountModal-{{ account[0] }}')">
-                            <img src="{{ url_for('static', filename='images/delete.png')}}" href="{{url_for('delete_account_route')}}" onclick="showModal('deleteAccountModal-{{ account[0] }}')">
+                            <img src="{{ url_for('static', filename='images/Edit.jpg')}}" href="{{url_for('edit_account_route', account_id=account[0])}}" onclick="showModal('editAccountModal-{{ account[0] }}')">
+                            <img src="{{ url_for('static', filename='images/delete.png')}}" href="{{url_for('delete_account_route', account_id=account[0])}}" onclick="showModal('deleteAccountModal-{{ account[0] }}')">
                         </td>
                     </tr>
 
