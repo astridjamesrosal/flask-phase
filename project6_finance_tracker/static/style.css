@@ -91,7 +91,7 @@ body {
 .upper_empty_main_page {
     display: flex;
     justify-content: space-between;
-    padding: 2rem 5rem 0;
+    padding: 1.5rem 5rem 0;
     gap: 2rem;
 }
 
@@ -157,13 +157,12 @@ body {
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    padding: 2rem 0;
+    padding: 1rem 0;
 }
 
 .lower_empty_main_page img {
     height: 20rem;
     width: 15rem;
-    object-fit: contain;
 }
 
 .empty_main_message {
@@ -176,13 +175,11 @@ body {
 .empty_header {
     font-weight: 600;
     font-size: 2.5rem;
-    text-align: center;
     margin: 0 0 0.5rem;
 }
 
 .empty_main_body {
     max-width: 500px;
-    text-align: center;
     line-height: 1.4;
     font-size: 1.25rem;
     margin: 0.5rem 0 1.5rem;
@@ -190,12 +187,10 @@ body {
 
 .button_row {
     display: flex;
-    flex-direction: row;
     gap: 1.5rem;
 }
 
 .empty_main_message a {
-    display: inline-block;
     text-decoration: none;
     color: var(--text-light);
     background-color: var(--color-3);
