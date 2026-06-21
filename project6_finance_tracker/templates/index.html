@@ -43,24 +43,27 @@
         {% for transaction in transaction_list %}
 
                 <div class="transaction_box">
-                    <p class="transaction_id">{{ transaction[0] }}</p>
-                    <p class="date">{{ transaction[1] }}</p>
-                    <p class="transaction_type {{ transaction[4] }}">{{ transaction[4] }}</p>
-                    <p class="category_id">{{ transaction[8] }}</p>
-                    <p class="description">{{ transaction[6] }}</p>
-                    <p class="account_id">{{ transaction[7] }}</p>
-                    <p class="amount">{{ transaction[5] }}</p>
-                    <img src="{{ url_for('static', filename='images/Edit.jpg')}}" onclick="window.location.href='{{ url_for('transactions_list_route') }}'">
-                    <img src="{{ url_for('static', filename='images/delete.png')}}" onclick="window.location.href='{{ url_for('transactions_list_route') }}'">
-                    <p class="arrow">
-                        {% if transaction[4] == 'income' %}
-                            ↑
-                        {% else %}
-                            ↓
-                        {% endif %}
-                    </p>
+                    <div class="transaction_main_info">
+                        <p class="transaction_id">{{ transaction[0] }}</p>
+                        <p class="date">{{ transaction[1] }}</p>
+                        <p class="transaction_type {{ transaction[4] }}">{{ transaction[4] }}</p>
+                        <p class="category_id">{{ transaction[8] }}</p>
+                        <p class="account_id">Paid from {{ transaction[7] }}</p>
+                        <p class="arrow {{ transaction[4] }}">
+                            {% if transaction[4] == 'income' %}
+                                ↑
+                            {% else %}
+                                ↓
+                            {% endif %}
+                        </p>
+                        </div>
+                        <p class="amount">Php {{ "{:,.2f}".format(transaction[5]) }}</p>
+                        <div class="actions">
+                            <img src="{{ url_for('static', filename='images/Edit.jpg')}}" onclick="window.location.href='{{ url_for('transactions_list_route') }}'">
+                            <img src="{{ url_for('static', filename='images/delete.png')}}" onclick="window.location.href='{{ url_for('transactions_list_route') }}'">
+                        </div>
+                        <p class="description">{{ transaction[6] }}</p>
                 </div>
-
         {% endfor %}
 
             </div>
