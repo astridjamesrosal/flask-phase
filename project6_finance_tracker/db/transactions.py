@@ -54,7 +54,7 @@ def get_transactions_by_filter(transaction_type, category_id):
         conditions.append("transaction_type = ?")
         values.append(transaction_type)
     if category_id is not None:
-        conditions.append("category_id = ?")
+        conditions.append("Transactions.category_id = ?")
         values.append(category_id)
     if conditions:
         base_query += " WHERE " + " AND ".join(conditions)

@@ -599,7 +599,7 @@ body {
 
 .empty_page img {
     height: 28rem;
-    width: 25rem;
+    width: auto;
     object-fit: contain;
 }
 
@@ -627,7 +627,7 @@ body {
     transform: scale(1.1);
 }
 
-/* Populated Accounts Page - Upper */
+/* Populated Page - Upper */
 
 .upper_page {
     padding: 1rem 2rem;
@@ -742,5 +742,118 @@ tr:last-child td {
     border-radius: 15px;
     padding: 1.25rem;
     width: 30rem;
+    border: 5px solid var(--color-4);
+}
+
+/* Populated Categories Page - Lower */
+
+.lower_categories_page {
+    margin: 0 2rem;
+    background-color: var(--color-5);
+    border-radius: 20px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.lower_categories_text {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-light);
+    margin: 0 0 0.25rem;
+    flex-basis: 100%;
+}
+
+.categories_box {
+    display: inline-flex;
+    background-color: var(--color-3);
+    border-radius: 10px;
+    padding: 0.5rem 1.25rem;
+}
+
+.categories_box a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.categories_box:hover {
+    background-color: var(--color-2);
+    cursor: pointer;
+}
+
+/* View Category Page */
+
+.category_full_view {
+    background-color: var(--color-3);
+    border-radius: 15px;
+    margin: 0 2rem;
+    padding-bottom: 1rem;
+}
+
+.category_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-4);
+    border-radius: 15px 15px 0 0;
+    padding: 0.75rem 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.return_button {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.category_name_full_view {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.category_full_view .transaction_box {
+    margin: 0 auto;
+}
+
+.category_actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.category_actions img {
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.category_actions img:hover {
+    transform: scale(1.1);
+}
+
+[id^="editCategoryModal"] {
+    background-color: var(--color-1);
+    color: var(--text-light);
+    border-radius: 15px;
+    padding: 1.25rem;
+    width: 20rem;
+    border: 5px solid var(--color-4);
+}
+
+[id^="deleteCategoryModal"] {
+    background-color: var(--color-1);
+    color: var(--text-light);
+    border-radius: 15px;
+    padding: 1.25rem;
+    width: 25rem;
     border: 5px solid var(--color-4);
 }

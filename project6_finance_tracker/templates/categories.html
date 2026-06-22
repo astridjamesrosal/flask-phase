@@ -20,9 +20,11 @@
         {% else %}
         <div class="empty_page">
             <img src="{{ url_for('static', filename='images/categories_owl.jpg') }}" alt="owl">
-            <p class="empty_header">Give Your Money a Mission!</p>
-            <p class="empty_main_body">Stop playing the guessing game with your expenses. Group your transactions into custom buckets right now to design a personalized blueprint that lets you spend guilt-free on the things you love.</p>
-            <a href="#" onclick="showModal('createCategoryModal')">Add Your First Category</a>
+            <div class="empty_message">
+                <p class="empty_header">Give Your Money a Mission!</p>
+                <p class="empty_main_body">Stop playing the guessing game with your expenses. Group your transactions into custom buckets right now to design a personalized blueprint that lets you spend guilt-free on the things you love.</p>
+                <a href="#" onclick="showModal('createCategoryModal')">Add Your First Category</a>
+            </div>
         </div>
         {% endif %}
         <div class="modal" id="createCategoryModal">
@@ -30,8 +32,10 @@
                 <p>Create a new Category!</p>
                 <label>Category Name:</label>
                 <input type="text" name="category_name" placeholder="Food, School, Savings, etc.">
-                <button type="button" onclick="hideModal('createCategoryModal')">Cancel</button>
-                <button type="submit">Create</button>
+                <div class="buttons">
+                    <button type="button" class="btn-cancel" onclick="hideModal('createCategoryModal')">Cancel</button>
+                    <button type="submit" class="btn-confirm">Create</button>
+                </div>
             </form>
         </div>
     {% endblock %}

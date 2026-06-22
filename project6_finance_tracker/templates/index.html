@@ -59,8 +59,8 @@
                         </div>
                         <p class="amount">Php {{ "{:,.2f}".format(transaction[5]) }}</p>
                         <div class="actions">
-                            <img src="{{ url_for('static', filename='images/Edit.jpg')}}" onclick="window.location.href='{{ url_for('transactions_list_route') }}'">
-                            <img src="{{ url_for('static', filename='images/delete.png')}}" onclick="window.location.href='{{ url_for('transactions_list_route') }}'">
+                            <img src="{{ url_for('static', filename='images/Edit.jpg')}}" onclick="window.location.href='{{ url_for("transactions_list_route") }}'">
+                            <img src="{{ url_for('static', filename='images/delete.png')}}" onclick="window.location.href='{{ url_for("transactions_list_route") }}'">
                         </div>
                         <p class="description">{{ transaction[6] }}</p>
                 </div>

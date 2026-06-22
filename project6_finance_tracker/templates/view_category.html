@@ -1,34 +1,60 @@
 {% extends 'base.html' %}
     {% block content %}
         <div class="category_full_view">
-            <p class="category_name_full_view">{{ category_name[1] }}</p>
-            <button type="button" onclick="showModal('editCategoryModal-{{ category_name[0] }}')">Edit</button>
+            <div class="category_header">
+                <a href="{{ url_for('categories_list_route') }}" class="return_button">←</a>
+                <p class="category_name_full_view">{{ category_name[1] }}</p>
+                <div class="category_actions">
+                    <img src="{{ url_for('static', filename='images/Edit.jpg')}}" onclick="showModal('editCategoryModal-{{ category_name[0] }}')">
+                    <img src="{{ url_for('static', filename='images/delete.png')}}" onclick="showModal('deleteCategoryModal-{{ category_name[0] }}')">
+                </div>
+            </div>
+
             {% for transaction in category_transactions %}
                 <div class="transaction_box">
-                    <p>{{ transaction[1] }}</p>
-                    <p>{{ transaction[4] }}</p>
-                    <p>{{ transaction[8] }}</p>
-                    <p>{{ transaction[7] }}</p>
-                    <p>{{ transaction[6] }}</p>
-                    <p>{{ transaction[5] }}</p>
+                    <div class="transaction_main_info">
+                        <p class="transaction_id">{{ transaction[0] }}</p>
+                        <p class="date">{{ transaction[1] }}</p>
+                        <p class="transaction_type {{ transaction[4] }}">{{ transaction[4] }}</p>
+                        <p class="category_id">{{ transaction[8] }}</p>
+                        <p class="account_id">Paid from {{ transaction[7] }}</p>
+                        <p class="arrow {{ transaction[4] }}">
+                            {% if transaction[4] == 'income' %}
+                                ↑
+                            {% else %}
+                                ↓
+                            {% endif %}
+                        </p>
+                        </div>
+                        <p class="amount">Php {{ "{:,.2f}".format(transaction[5]) }}</p>
+                        <div class="actions">
+                            <img src="{{ url_for('static', filename='images/Edit.jpg')}}" onclick="window.location.href='{{ url_for("transactions_list_route") }}'">
+                            <img src="{{ url_for('static', filename='images/delete.png')}}" onclick="window.location.href='{{ url_for("transactions_list_route") }}'">
+                        </div>
+                        <p class="description">{{ transaction[6] }}</p>
                 </div>
             {% endfor %}
-            <button type="button" onclick="showModal('deleteCategoryModal-{{ category_name[0] }}')">Delete</button>
+
             <div class="modal" id="editCategoryModal-{{ category_name[0] }}">
                 <form action="{{ url_for('edit_category_route', category_id=category_name[0]) }}" method="POST">
+                    <p>Edit Category</p>
                     <label>Category Name:</label>
                     <input type="text" name="category_name" value="{{ category_name[1] }}">
-                    <button type="button" onclick="hideModal('editCategoryModal-{{ category_name[0] }}')">Cancel</button>
-                    <button type="submit">Update</button>
+                    <div class="buttons"> 
+                        <button type="button" class="btn-cancel" onclick="hideModal('editCategoryModal-{{ category_name[0] }}')">Cancel</button>
+                        <button type="submit" class="btn-confirm">Update</button>
+                    </div>
                 </form>
             </div>
             <div class="modal" id="deleteCategoryModal-{{ category_name[0] }}">
                 <form action="{{ url_for('delete_category_route', category_id=category_name[0]) }}" method="POST">
-                    <p class="delete_message">Are you sure you want to delete Category:{{ category_name[1] }}</p>
-                    <button type="button" onclick="hideModal('deleteCategoryModal-{{ category_name[0] }}')">No, Go Back</button>
-                    <button type="submit">Yes, Delete</button>
+                    <p>Delete Category</p>
+                    <p class="delete_message">Are you sure you want to delete Category: {{ category_name[1] }}</p>
+                    <div class="buttons">
+                        <button type="button" class="btn-cancel" onclick="hideModal('deleteCategoryModal-{{ category_name[0] }}')">No, Go Back</button>
+                        <button type="submit" class="btn-confirm">Yes, Delete</button>
+                    </div>
                 </form>
             </div>
         </div>
     {% endblock %}
- 
