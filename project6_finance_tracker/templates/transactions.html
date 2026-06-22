@@ -7,6 +7,8 @@
                 <img src="{{ url_for('static', filename='images/header-owl.jpg')}}" alt="owl">
                 <p class="upper_message_text">Track your daily spending habits and watch your financial timeline grow.</p>
                 <a href="#" onclick="showModal('createTransactionModal')">Add Transaction</a>
+            </div>
+            <div class="transaction_filter">    
                 <form method="GET" action="{{ url_for('transactions_list_route') }}">
                     <select name="transaction_type" onchange="this.form.submit()">
                         <option value="" {% if not request.args.get('transaction_type') %}selected{% endif %}>Both</option>
@@ -19,93 +21,120 @@
 
         <div class="lower_transactions_page">
             {% for transaction in transactions_list %}
-            <div class="transaction_box">
-                <p class="transaction_date">{{ transaction[1] }}</p>
-                <p class="transaction_type">{{ transaction[4] }}</p>
-                <p class="transaction_category">{{ transaction[8] }}</p>
-                <p class="transaction_account">{{ transaction[7] }}</p>
-                <textarea class="transaction_description">{{ transaction[6] }}</textarea>
-                <p class="transaction_amount">{{ transaction[5] }}</p>
-                <img src="{{ url_for('static', filename='images/Edit.jpg')}}" href="{{url_for('edit_transaction_route', transaction_id=transaction[0])}}" onclick="showModal('editTransactionModal-{{ transaction[0] }}')">
-                <img src="{{ url_for('static', filename='images/delete.png')}}" href="{{url_for('delete_transaction_route', transaction_id=transaction[0])}}" onclick="showModal('deleteTransactionModal-{{ transaction[0] }}')">
-                <div class="transaction_arrow">
-                    {% if transaction[4] == 'income' %}
-                            <div class="up_arrow">↑</div>
-                        {% else %}
-                            <div class="down_arrow">↓</div>
-                        {% endif %}
+                <div class="transaction_box">
+                    <div class="transaction_main_info">
+                        <p class="transaction_id">{{ transaction[0] }}</p>
+                        <p class="date">{{ transaction[1] }}</p>
+                        <p class="transaction_type {{ transaction[4] }}">{{ transaction[4] }}</p>
+                        <p class="category_id">{{ transaction[8] }}</p>
+                        <p class="account_id">Paid from {{ transaction[7] }}</p>
+                        <p class="arrow {{ transaction[4] }}">
+                            {% if transaction[4] == 'income' %}
+                                ↑
+                            {% else %}
+                                ↓
+                            {% endif %}
+                        </p>
+                        </div>
+                        <p class="amount">Php {{ "{:,.2f}".format(transaction[5]) }}</p>
+                        <div class="actions">
+                            <img src="{{ url_for('static', filename='images/Edit.jpg')}}" onclick="showModal('editTransactionModal-{{ transaction[0] }}')">
+                            <img src="{{ url_for('static', filename='images/delete.png')}}" onclick="showModal('deleteTransactionModal-{{ transaction[0] }}')">
+                        </div>
+                        <p class="description">{{ transaction[6] }}</p>
                 </div>
-            </div>
-            <div class="modal" id="editTransactionModal-{{ transaction[0] }}">
-                <form action="{{ url_for('edit_transaction_route', transaction_id=transaction[0]) }}" method="POST">
-                    <label>Category:</label>
-                    <select name="category_id">
-                        <option value="">Choose a Category</option>
-                        {% for category in categories_list %}
-                            <option value="{{ category[0] }}" {% if category[0] == transaction[3] %}selected{% endif %}>{{ category[1] }}</option>
-                        {% endfor %}
-                    </select>
-                    <label>Amount:</label>
-                    <input type="number" name="amount" value="{{ transaction[5] }}">
-                    <label>Transaction Type:</label>
-                    <select name="transaction_type">
-                        <option value="">Choose a Transaction Type</option>
-                        <option value="income" {% if transaction[4] == 'income' %}selected{% endif %}>Income</option>
-                        <option value="expense" {% if transaction[4] == 'expense' %}selected{% endif %}>Expense</option>
-                    </select>
-                    <label>Description:</label>
-                    <textarea name="description">{{ transaction[6] }}</textarea>
-                    <button type="button" onclick="hideModal('editTransactionModal-{{ transaction[0] }}')">Cancel</button>
-                    <button type="submit">Update</button>
-                </form>
-            </div>
-            <div class="modal" id="deleteTransactionModal-{{ transaction[0] }}">
-                <form action="{{ url_for('delete_transaction_route', transaction_id=transaction[0]) }}" method="POST">
-                    <p class="delete_message">Are you sure you want to your transaction on:{{ transaction[1] }}</p>
-                    <button type="button" onclick="hideModal('deleteTransactionModal-{{ transaction[0] }}')">No, Go Back</button>
-                    <button type="submit">Yes, Delete</button>
-                </form>
-            </div>
+                <div class="modal" id="editTransactionModal-{{ transaction[0] }}">
+                    <form action="{{ url_for('edit_transaction_route', transaction_id=transaction[0]) }}" method="POST">
+                        <p>Edit Transaction</p>
+                        <label>Category:</label>
+                        <select name="category_id">
+                            <option value="">Choose a Category</option>
+                            {% for category in categories_list %}
+                                <option value="{{ category[0] }}" {% if category[0] == transaction[3] %}selected{% endif %}>{{ category[1] }}</option>
+                            {% endfor %}
+                        </select>
+                        <label>Amount:</label>
+                        <input type="number" name="amount" value="{{ transaction[5] }}">
+                        <label>Transaction Type:</label>
+                        <select name="transaction_type">
+                            <option value="">Choose a Transaction Type</option>
+                            <option value="income" {% if transaction[4] == 'income' %}selected{% endif %}>Income</option>
+                            <option value="expense" {% if transaction[4] == 'expense' %}selected{% endif %}>Expense</option>
+                        </select>
+                        <label>Description:</label>
+                        <textarea name="description">{{ transaction[6] }}</textarea>
+                        <div class="buttons">
+                            <button type="button" class="btn-cancel" onclick="hideModal('editTransactionModal-{{ transaction[0] }}')">Cancel</button>
+                            <button type="submit" class="btn-confirm">Update</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal" id="deleteTransactionModal-{{ transaction[0] }}">
+                    <form action="{{ url_for('delete_transaction_route', transaction_id=transaction[0]) }}" method="POST">
+                        <p class="delete_message">Are you sure you want to your transaction on: {{ transaction[1] }}</p>
+                        <div class="buttons">
+                            <button type="button" class="btn-cancel" onclick="hideModal('deleteTransactionModal-{{ transaction[0] }}')">No, Go Back</button>
+                            <button type="submit" class="btn-confirm">Yes, Delete</button>
+                        </div>
+                    </form>
+                </div>
         {% endfor %}
         </div>
         {% else %}
         <div class="empty_page">
             <img src="{{ url_for('static', filename='images/transaction_owl.jpg') }}" alt="owl">
-            <p class="empty_header">A Fresh Start for Your Funds</p>
-            <p class="empty_main_body">Your transaction list is currently a blank canvas. Start logging your spending today to gain the insights you need to master your money.</p>
-            <a href="#" onclick="showModal('createTransactionModal')">Add Your First Transaction</a>
+            <div class="empty_message">
+                <p class="empty_header">A Fresh Start for Your Funds</p>
+                <p class="empty_main_body">Your transaction list is currently a blank canvas. Start logging your spending today to gain the insights you need to master your money.</p>
+                <a href="#" onclick="showModal('createTransactionModal')">Add Your First Transaction</a>
+            </div>
         </div>
         {% endif %}
         <div class="modal" id="createTransactionModal">
             <form action="{{ url_for('create_transaction_route') }}" method="POST">
                 <p>Create a new Transaction!</p>
-                    <label>Date:</label>
-                    <input type="date" name="date">
-                    <label>Account:</label>
-                    <select name="account_id">
-                        <option value="">Choose an Account</option>
-                        {% for account in accounts_list %}
-                            <option value="{{ account[0] }}">{{ account[1] }}</option>
-                        {% endfor %}
-                    </select>
-                    <label>Category:</label>
-                    <select name="category_id">
-                        <option value="">Choose a Category</option>
-                        {% for category in categories_list %}
-                            <option value="{{ category[0] }}">{{ category[1] }}</option>
-                        {% endfor %}
-                    </select>
-                    <label>Amount:</label>
-                    <input type="number" name="amount">
-                    <label>Transaction Type:</label>
-                    <select name="transaction_type">
-                        <option value="">Choose a Transaction Type</option>
-                        <option value="income">Income</option>
-                        <option value="expense">Expense</option>
-                    </select>
-                    <label>Description:</label>
-                    <textarea name="description"></textarea>
-                <button type="submit">Create</button>
+                    <div class="field">
+                        <label>Date:</label>
+                        <input type="date" name="date">
+                    </div>
+                    <div class="field">
+                        <label>Account:</label>
+                        <select name="account_id">
+                            <option value="">Choose an Account</option>
+                            {% for account in accounts_list %}
+                                <option value="{{ account[0] }}">{{ account[1] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Category:</label>
+                        <select name="category_id">
+                            <option value="">Choose a Category</option>
+                            {% for category in categories_list %}
+                                <option value="{{ category[0] }}">{{ category[1] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Amount:</label>
+                        <input type="number" name="amount">
+                    </div>
+                    <div class="field">
+                        <label>Transaction Type:</label>
+                        <select name="transaction_type">
+                            <option value="">Choose a Transaction Type</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                        </select>
+                    </div>
+                    <div class="description-field">
+                        <label>Description:</label>
+                        <textarea name="description"></textarea>
+                    </div>
+                    <div class="buttons">
+                        <button type="button" class="btn-cancel" onclick="hideModal('createTransactionModal')">Cancel</button>
+                        <button type="submit" class="btn-confirm">Create</button>
+                    </div>
             </form>
         </div>
     {% endblock %}

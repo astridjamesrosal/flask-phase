@@ -48,7 +48,6 @@
             </div>
             <div class="modal" id="deleteCategoryModal-{{ category_name[0] }}">
                 <form action="{{ url_for('delete_category_route', category_id=category_name[0]) }}" method="POST">
-                    <p>Delete Category</p>
                     <p class="delete_message">Are you sure you want to delete Category: {{ category_name[1] }}</p>
                     <div class="buttons">
                         <button type="button" class="btn-cancel" onclick="hideModal('deleteCategoryModal-{{ category_name[0] }}')">No, Go Back</button>

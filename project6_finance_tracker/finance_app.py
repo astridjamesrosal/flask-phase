@@ -100,8 +100,8 @@ def delete_category_route(category_id):
 
 @app.route('/transactions', methods=['GET'])
 def transactions_list_route():
-    transaction_type = request.args.get('transaction_type')
-    category_id = request.args.get('category_id')
+    transaction_type = request.args.get('transaction_type') or None
+    category_id = request.args.get('category_id') or None
     accounts_list = get_all_accounts()
     categories_list = get_all_categories()
     if 'transaction_type' in request.args or 'category_id' in request.args:
