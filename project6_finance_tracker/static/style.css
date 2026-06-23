@@ -336,19 +336,6 @@ body {
     transform: scale(1.1);
 }
 
-.view_all_link {
-    align-self: flex-end;
-    color: var(--text-light);
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-}
-
-.view_all_link:hover {
-    color: var(--color-2);
-}
-
 /* Populated Main Page - Upper */
 
 .upper_main_page {
@@ -383,14 +370,14 @@ body {
 
 .amount_income p {
     font-weight: 700;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: var(--income-color);
     margin: 0.25rem 0 0;
 }
 
 .amount_expense p {
     font-weight: 700;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: var(--expense-color);
     margin: 0.25rem 0 0;
 }
@@ -454,7 +441,7 @@ body {
 
 .amount_balance p {
     font-weight: 700;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: var(--text-light);
     margin: 0rem;
     text-align: center;
@@ -483,7 +470,7 @@ body {
 
 .lower_main_page {
     background-color: var(--color-5);
-    margin: 2rem 6rem 0 6rem;
+    margin: 1rem 6rem 0rem 6rem;
     border-radius: 19px;
 }
 
@@ -495,7 +482,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 1rem;
+    padding: 1rem 1rem 0 1rem;
 }
 
 .transaction_box {
@@ -604,6 +591,19 @@ body {
     padding-bottom: 0.3rem;
     grid-column: 1;
     grid-row: 2;
+}
+
+.view_all_link {
+    align-self: flex-end;
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0 0 1rem 0;
+}
+
+.view_all_link:hover {
+    color: var(--color-2);
 }
 
 /* Empty Page */
@@ -814,12 +814,13 @@ tr:last-child td {
 /* View Category Page */
 
 .category_full_view {
-    background-color: var(--color-3);
+    background-color: var(--color-2);
     border-radius: 15px;
-    margin: 0 2rem;
+    margin: 0 auto;
     padding-bottom: 2rem;
     gap: 1rem;
     display: flex;
+    width: 72rem;
     flex-direction: column;
 }
 
@@ -848,6 +849,7 @@ tr:last-child td {
 }
 
 .category_full_view .transaction_box {
+    width: auto;
     margin: 0 auto;
 }
 
@@ -918,7 +920,7 @@ tr:last-child td {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 0.3rem;
+    margin-top: 0;
     gap: 1rem;
 }
 
