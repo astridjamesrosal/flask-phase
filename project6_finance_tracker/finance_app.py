@@ -2,7 +2,7 @@ from flask import Flask, redirect, url_for, render_template, request, flash
 from init_db import init_db
 from db.accounts import create_account, get_all_accounts, get_account, edit_account, delete_account
 from db.categories import create_category, get_all_categories, get_category, edit_category, delete_category
-from db.transactions import create_transaction, get_total_income, get_total_expense, get_all_transactions, get_transaction, get_transactions_by_filter, edit_transaction, delete_transaction
+from db.transactions import get_recent_transactions, create_transaction, get_total_income, get_total_expense, get_all_transactions, get_transaction, get_transactions_by_filter, edit_transaction, delete_transaction
 app = Flask(__name__)
 app.secret_key = 'finance_secret_key'
 init_db()
@@ -12,10 +12,10 @@ def index():
     total_income = get_total_income()[0] or 0
     total_expense = get_total_expense()[0] or 0
     balance = total_income - total_expense
-    transaction_list = get_all_transactions()
+    transaction_list = get_recent_transactions()
     accounts_list = get_all_accounts()
     categories_list = get_all_categories()
-    return render_template('index.html', total_income=total_income, total_expense=total_expense, balance=balance, transaction_list=transaction_list, accounts_list=accounts_list, categories_list=categories_list)
+    return render_template('index.html', total_income=total_income, total_expense=total_expense, balance=balance, recent_transactions_list=transaction_list, accounts_list=accounts_list, categories_list=categories_list)
 
 @app.route('/accounts', methods=['GET'])
 def accounts_list_route():

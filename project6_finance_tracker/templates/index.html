@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
     {% block content %}
-        {% if transaction_list %}
+        {% if recent_transactions_list %}
 
         <div class="upper_main_page">
 
@@ -40,7 +40,7 @@
         <div class="lower_main_page">
             <div class="transaction_table">
 
-        {% for transaction in transaction_list %}
+        {% for transaction in recent_transactions_list %}
 
                 <div class="transaction_box">
                     <div class="transaction_main_info">
@@ -65,7 +65,7 @@
                         <p class="description">{{ transaction[6] }}</p>
                 </div>
         {% endfor %}
-
+                    <a href="{{ url_for('transactions_list_route') }}" class="view_all_link">View All Transactions →</a>
             </div>
         </div>
 
