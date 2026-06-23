@@ -28,7 +28,7 @@ def get_total_expense():
     connection.close()
     return total_expense
 
-def get_recent_transactions(limit=5):
+def get_recent_transactions(limit=3):
     connection = sqlite3.connect('finance_tracker.db')
     cursor = connection.cursor()
     cursor.execute("SELECT Transactions.*, Accounts.name, Categories.category_name FROM Transactions JOIN Accounts ON Transactions.account_id = Accounts.account_id JOIN Categories ON Transactions.category_id = Categories.category_id ORDER BY date DESC LIMIT ?", (limit,))

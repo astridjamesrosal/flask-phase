@@ -8,14 +8,14 @@
             <div class="not_empty_box">
                 <p>Total Income</p>
                 <div class="amount_income">
-                    <p>Php {{ total_income }}</p>
+                    <p>Php {{ "{:,.2f}".format(total_income) }}</p>
                 </div>
             </div>
 
             <div class="not_empty_box">
                 <p>Total Expense</p>
                 <div class="amount_expense">
-                    <p>Php {{ total_expense }}</p>
+                    <p>Php {{ "{:,.2f}".format(total_expense) }}</p>
                 </div>
             </div>
 
@@ -29,7 +29,7 @@
                 <div class="box_balance">
                     <p>Total Balance</p>
                     <div class="amount_balance">
-                        <p>Php {{ balance }}</p>
+                        <p>Php {{ "{:,.2f}".format(balance) }}</p>
                     </div>
                     <a href="#" onclick="showModal('createTransactionModal')">Add Transaction</a>
                 </div>
