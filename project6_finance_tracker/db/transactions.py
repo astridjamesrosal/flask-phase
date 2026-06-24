@@ -2,6 +2,7 @@ import sqlite3
 
 def create_transaction(date, account_id, category_id, transaction_type, amount, description):
     connection = sqlite3.connect('finance_tracker.db')
+    connection.execute("PRAGMA foreign_keys = ON")
     cursor = connection.cursor()
     cursor.execute("INSERT INTO Transactions (date, account_id, category_id, transaction_type, amount, description) VALUES (?, ?, ?, ?, ?, ?)", (date, account_id, category_id, transaction_type, amount, description))
     rows_affected = cursor.rowcount
@@ -14,6 +15,7 @@ def create_transaction(date, account_id, category_id, transaction_type, amount, 
 
 def get_total_income():
     connection = sqlite3.connect('finance_tracker.db')
+    connection.execute("PRAGMA foreign_keys = ON")
     cursor = connection.cursor()
     cursor.execute("SELECT SUM (amount) FROM Transactions WHERE transaction_type = 'income'")
     total_income = cursor.fetchone()
@@ -22,6 +24,7 @@ def get_total_income():
 
 def get_total_expense():
     connection = sqlite3.connect('finance_tracker.db')
+    connection.execute("PRAGMA foreign_keys = ON")
     cursor = connection.cursor()
     cursor.execute("SELECT SUM (amount) FROM Transactions WHERE transaction_type = 'expense'")
     total_expense = cursor.fetchone()
@@ -30,6 +33,7 @@ def get_total_expense():
 
 def get_recent_transactions(limit=3):
     connection = sqlite3.connect('finance_tracker.db')
+    connection.execute("PRAGMA foreign_keys = ON")
     cursor = connection.cursor()
     cursor.execute("SELECT Transactions.*, Accounts.name, Categories.category_name FROM Transactions JOIN Accounts ON Transactions.account_id = Accounts.account_id JOIN Categories ON Transactions.category_id = Categories.category_id ORDER BY date DESC LIMIT ?", (limit,))
     recent_transactions_list = cursor.fetchall()
@@ -38,6 +42,7 @@ def get_recent_transactions(limit=3):
 
 def get_all_transactions():
     connection = sqlite3.connect('finance_tracker.db')
+    connection.execute("PRAGMA foreign_keys = ON")
     cursor = connection.cursor()
     cursor.execute("SELECT Transactions.*, Accounts.name, Categories.category_name FROM Transactions JOIN Accounts ON Transactions.account_id = Accounts.account_id JOIN Categories ON Transactions.category_id = Categories.category_id ORDER BY date DESC")
     transactions_list = cursor.fetchall()
@@ -46,6 +51,7 @@ def get_all_transactions():
 
 def get_transaction(transaction_id):
     connection = sqlite3.connect('finance_tracker.db')
+    connection.execute("PRAGMA foreign_keys = ON")
     cursor = connection.cursor()
     cursor.execute("SELECT Transactions.*, Accounts.name, Categories.category_name FROM Transactions JOIN Accounts ON Transactions.account_id = Accounts.account_id JOIN Categories ON Transactions.category_id = Categories.category_id WHERE transaction_id = ?", (transaction_id,))
     single_transaction = cursor.fetchone()
@@ -54,6 +60,7 @@ def get_transaction(transaction_id):
 
 def get_transactions_by_filter(transaction_type, category_id):
     connection = sqlite3.connect('finance_tracker.db')
+    connection.execute("PRAGMA foreign_keys = ON")
     cursor = connection.cursor()
     base_query = "SELECT Transactions.*, Accounts.name, Categories.category_name FROM Transactions JOIN Accounts ON Transactions.account_id = Accounts.account_id JOIN Categories ON Transactions.category_id = Categories.category_id"
     conditions = []
@@ -75,6 +82,7 @@ def get_transactions_by_filter(transaction_type, category_id):
 
 def edit_transaction(transaction_id, category_id, transaction_type, amount, description):
     connection = sqlite3.connect('finance_tracker.db')
+    connection.execute("PRAGMA foreign_keys = ON")
     cursor = connection.cursor()
     cursor.execute("UPDATE Transactions SET category_id = ?, transaction_type = ?, amount = ?, description = ? WHERE transaction_id = ?", (category_id, transaction_type, amount, description, transaction_id))
     rows_affected = cursor.rowcount
@@ -87,6 +95,7 @@ def edit_transaction(transaction_id, category_id, transaction_type, amount, desc
     
 def delete_transaction(transaction_id):
     connection = sqlite3.connect('finance_tracker.db')
+    connection.execute("PRAGMA foreign_keys = ON")
     cursor = connection.cursor()
     cursor.execute("DELETE FROM Transactions WHERE transaction_id = ?", (transaction_id,))
     rows_affected = cursor.rowcount

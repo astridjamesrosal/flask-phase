@@ -85,6 +85,8 @@ def edit_category_route(category_id):
 def view_category_route(category_id):
     category_id = int(category_id)
     category_name = get_category(category_id)
+    if category_name is None:
+        return redirect(url_for('categories_list_route'))
     category_transactions = get_transactions_by_filter(None, category_id)
     return render_template('view_category.html', category_name=category_name, category_transactions=category_transactions)
     
