@@ -1,6 +1,6 @@
 import sqlite3
 
-def create_category(category_name, color='#ffffff'):
+def create_category(category_name, color='#ff0000'):
     connection = sqlite3.connect('finance_tracker.db')
     connection.execute("PRAGMA foreign_keys = ON")
     cursor = connection.cursor()
