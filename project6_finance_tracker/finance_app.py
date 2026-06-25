@@ -63,7 +63,8 @@ def categories_list_route():
 @app.route('/categories/create', methods=['POST'])
 def create_category_route():
     category_name = request.form['category_name']
-    result = create_category(category_name)
+    color = request.form['color']
+    result = create_category(category_name, color)
     if result:
         return redirect(url_for('categories_list_route'))
     else:

@@ -1,10 +1,10 @@
 import sqlite3
 
-def create_category(category_name):
+def create_category(category_name, color='#a78bfa'):
     connection = sqlite3.connect('finance_tracker.db')
     connection.execute("PRAGMA foreign_keys = ON")
     cursor = connection.cursor()
-    cursor.execute("INSERT INTO Categories (category_name) VALUES (?)", (category_name,))
+    cursor.execute("INSERT INTO Categories (category_name, color) VALUES (?, ?)", (category_name, color))
     rows_affected = cursor.rowcount
     connection.commit()
     connection.close()
@@ -17,7 +17,7 @@ def get_all_categories():
     connection = sqlite3.connect('finance_tracker.db')
     connection.execute("PRAGMA foreign_keys = ON")
     cursor = connection.cursor()
-    cursor.execute("SELECT category_id, category_name, is_active FROM Categories WHERE is_active = 1")
+    cursor.execute("SELECT category_id, category_name, is_active, color FROM Categories WHERE is_active = 1")
     category_list = cursor.fetchall()
     connection.close()
     return category_list

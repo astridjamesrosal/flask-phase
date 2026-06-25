@@ -15,7 +15,8 @@ def init_db():
         CREATE TABLE IF NOT EXISTS Categories (
             category_id INTEGER PRIMARY KEY,
             category_name TEXT,
-            is_active INTEGER DEFAULT 1
+            is_active INTEGER DEFAULT 1,
+                   color TEXT NOT NULL DEFAULT '#a78bfa'
         )    
         """)
     cursor.execute("""
