@@ -13,7 +13,7 @@
         <div class="lower_categories_page">
             <p class="lower_categories_text">Select a category to see exactly where your money went.</p>
             {% for category in categories_list %}
-            <div class="categories_box" style="border-left: 4px solid {{ category[3] }};"><a href="{{ url_for('view_category_route', category_id=category[0])}}">{{ category[1] }}</a></div>
+            <div class="categories_box" style="border-left: 4px solid {{ category[3] | default('#a78bfa') }};"><a href="{{ url_for('view_category_route', category_id=category[0])}}">{{ category[1] }}</a></div>
         
         {% endfor %}
         </div>
