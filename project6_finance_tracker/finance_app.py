@@ -1,11 +1,16 @@
+from dotenv import load_dotenv
+import os
+load_dotenv()
 from flask import Flask, redirect, url_for, render_template, request, flash
 from init_db import init_db
 from db.accounts import create_account, get_all_accounts, get_account, edit_account, delete_account
 from db.categories import create_category, get_all_categories, get_category, edit_category, delete_category
 from db.transactions import get_recent_transactions, create_transaction, get_total_income, get_total_expense, get_all_transactions, get_transaction, get_transactions_by_filter, edit_transaction, delete_transaction
 app = Flask(__name__)
-app.secret_key = 'finance_secret_key'
+app.secret_key = os.environ.get('SECRET_KEY', 'dev_fallback_key')
 init_db()
+
+VALID_TYPES = {"income", "expense"}
 
 @app.route('/', methods=['GET'])
 def index():
@@ -35,9 +40,15 @@ def create_account_route():
 
 @app.route('/accounts/<account_id>/edit', methods=['POST'])
 def edit_account_route(account_id):
-    account_id = int(account_id)
+    try:
+        account_id = int(account_id)
+    except ValueError:
+        flash("Invalid Input, Please check your entry.")
+        return redirect(url_for('accounts_list_route'))
+    
     name = request.form['name']
     account_type = request.form['account_type']
+
     result = edit_account(account_id, name, account_type)
     if result:
         return redirect(url_for('accounts_list_route'))
@@ -47,7 +58,12 @@ def edit_account_route(account_id):
     
 @app.route('/accounts/<account_id>/delete', methods=['POST'])
 def delete_account_route(account_id):
-    account_id = int(account_id)
+    try:
+        account_id = int(account_id)
+    except ValueError:
+        flash("Invalid Input, Please check your entry.")
+        return redirect(url_for('accounts_list_route'))
+    
     result = delete_account(account_id)
     if result:
         return redirect(url_for('accounts_list_route'))
@@ -73,7 +89,12 @@ def create_category_route():
 
 @app.route('/categories/<category_id>/edit', methods=['POST'])
 def edit_category_route(category_id):
-    category_id = int(category_id)
+    try:
+        category_id = int(category_id)
+    except ValueError:
+        flash("Invalid Input, Please check your entry.")
+        return redirect(url_for('categories_list_route'))
+    
     category_name = request.form['category_name']
     result = edit_category(category_id, category_name)
     if result:
@@ -84,7 +105,12 @@ def edit_category_route(category_id):
     
 @app.route('/categories/<category_id>/', methods=['GET'])
 def view_category_route(category_id):
-    category_id = int(category_id)
+    try:
+        category_id = int(category_id)
+    except ValueError:
+        flash("Invalid Input, Please check your entry.")
+        return redirect(url_for('categories_list_route'))
+    
     category_name = get_category(category_id)
     if category_name is None:
         return redirect(url_for('categories_list_route'))
@@ -93,7 +119,12 @@ def view_category_route(category_id):
     
 @app.route('/categories/<category_id>/delete', methods=['POST'])
 def delete_category_route(category_id):
-    category_id = int(category_id)
+    try:
+        category_id = int(category_id)
+    except ValueError:
+        flash("Invalid Input, Please check your entry.")
+        return redirect(url_for('categories_list_route'))
+    
     result = delete_category(category_id)
     if result:
         return redirect(url_for('categories_list_route'))
@@ -124,9 +155,19 @@ def create_transaction_route():
     transaction_type = request.form['transaction_type']
     amount = request.form['amount']
     description = request.form['description']
-    account_id = int(account_id)
-    category_id = int(category_id)
-    amount = float(amount)
+    
+    try:
+        account_id = int(account_id)
+        category_id = int(category_id)
+        amount = float(amount)
+    except ValueError:
+        flash("Invalid Input, Please check your entries.")
+        return redirect(url_for('transactions_list_route'))
+    
+    if transaction_type not in VALID_TYPES:
+        flash("Invalid Transaction Type.")
+        return redirect(url_for('transactions_list_route'))
+    
     result = create_transaction(date, account_id, category_id, transaction_type, amount, description)
     if result:
         return redirect(url_for('transactions_list_route'))
@@ -140,9 +181,19 @@ def edit_transaction_route(transaction_id):
     transaction_type = request.form['transaction_type']
     amount = request.form['amount']
     description = request.form['description']
-    transaction_id = int(transaction_id)
-    category_id = int(category_id)
-    amount = float(amount)
+
+    try:
+        transaction_id = int(transaction_id)
+        category_id = int(category_id)
+        amount = float(amount)
+    except ValueError:
+        flash("Invalid Input, Please check your entries.")
+        return redirect(url_for('transactions_list_route'))
+    
+    if transaction_type not in VALID_TYPES:
+        flash("Invalid Transaction Type")
+        return redirect(url_for('transactions_list_route'))
+    
     result = edit_transaction(transaction_id, category_id, transaction_type, amount, description)
     if result:
         return redirect(url_for('transactions_list_route'))
@@ -152,7 +203,11 @@ def edit_transaction_route(transaction_id):
 
 @app.route('/transactions/<transaction_id>/delete', methods=['POST'])
 def delete_transaction_route(transaction_id):
-    transaction_id = int(transaction_id)
+    try:
+        transaction_id = int(transaction_id)
+    except ValueError:
+        flash("Invalid Input, Please check your entry.")
+        return redirect(url_for('transactions_list_route'))
     result = delete_transaction(transaction_id)
     if result:
         return redirect(url_for('transactions_list_route'))
@@ -161,4 +216,4 @@ def delete_transaction_route(transaction_id):
         return redirect(url_for('transactions_list_route'))
 
 if __name__ == '__main__': 
-    app.run(debug=True)
+    app.run(debug=False)
