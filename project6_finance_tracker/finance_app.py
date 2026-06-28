@@ -222,4 +222,4 @@ def delete_transaction_route(transaction_id):
         return redirect(url_for('transactions_list_route'))
 
 if __name__ == '__main__': 
-    app.run(debug=True)
+    app.run(debug=False)
