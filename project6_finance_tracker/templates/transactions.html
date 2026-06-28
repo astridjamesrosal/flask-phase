@@ -71,7 +71,7 @@
                 </div>
                 <div class="modal" id="deleteTransactionModal-{{ transaction[0] }}">
                     <form action="{{ url_for('delete_transaction_route', transaction_id=transaction[0]) }}" method="POST">
-                        <p class="delete_message">Are you sure you want to your transaction on: {{ transaction[1] }}</p>
+                        <p class="delete_message">Are you sure you want to delete your transaction on: {{ transaction[1] }}</p>
                         <div class="buttons">
                             <button type="button" class="btn-cancel" onclick="hideModal('deleteTransactionModal-{{ transaction[0] }}')">No, Go Back</button>
                             <button type="submit" class="btn-confirm">Yes, Delete</button>
