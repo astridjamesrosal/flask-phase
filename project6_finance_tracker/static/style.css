@@ -86,6 +86,16 @@ body {
     color: var(--text-light);
 }
 
+/* Flash Message */
+.flash_message {
+    background-color: #f87171;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+}
 /* Modals */
 
 .modal {

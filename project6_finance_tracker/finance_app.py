@@ -29,8 +29,11 @@ def accounts_list_route():
 
 @app.route('/accounts/create', methods=['POST'])
 def create_account_route():
-    name = request.form['name']
+    name = request.form['name'].strip()
     account_type = request.form['account_type']
+    if not name or not account_type:
+        flash("Account name and type are required.")
+        return redirect(url_for('accounts_list_route'))
     result = create_account(name, account_type)
     if result:
         return redirect(url_for('accounts_list_route'))
@@ -78,8 +81,11 @@ def categories_list_route():
 
 @app.route('/categories/create', methods=['POST'])
 def create_category_route():
-    category_name = request.form['category_name']
+    category_name = request.form['category_name'].strip()
     color = request.form['color']
+    if not category_name:
+        flash("Category name is required.")
+        return redirect(url_for('categories_list_route'))
     result = create_category(category_name, color)
     if result:
         return redirect(url_for('categories_list_route'))
@@ -216,4 +222,4 @@ def delete_transaction_route(transaction_id):
         return redirect(url_for('transactions_list_route'))
 
 if __name__ == '__main__': 
-    app.run(debug=False)
+    app.run(debug=True)
