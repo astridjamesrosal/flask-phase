@@ -17,14 +17,21 @@
             <a class="add-session active" href="/add_session">Add Study Session</a>
         </div>
     </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash_message {{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
     <form class="add-form" action="{{ url_for('add_session_route') }}" method="POST">
         <div class="one">
             <label for="subject">Subject:</label>
-            <input name="subject" id="subject" type="text" placeholder="Ex: Science or Any Field Of Study" required>
+            <input name="subject" id="subject" type="text" required placeholder="Ex: Science or Any Field Of Study">
         </div>
         <div class="two">
             <label for="prodrat">My Productivity Rating:</label>
-            <input name="productivity_rating" id="prodrat" type="number" min="1" max="5" placeholder="Rate from 1 to 5" required>
+            <input name="productivity_rating" id="prodrat" type="number" min="1" max="5" required placeholder="Rate from 1 to 5">
         </div>
         <div class="three">
             <label for="start">Start-Time:</label>
@@ -35,7 +42,7 @@
             <input name="end_time" id="end" type="datetime-local" required>
         </div>
         <label for="keytak">My Keytakeaways:</label>
-        <textarea name="key_takeaways" id="keytak" placeholder="I have learned..." required></textarea>
+        <textarea name="key_takeaways" id="keytak" required placeholder="I have learned..."></textarea>
         
         <button type="submit">Add Session</button>
     </form>

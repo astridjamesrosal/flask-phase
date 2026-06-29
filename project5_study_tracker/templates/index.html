@@ -17,6 +17,13 @@
             <a class="add-session" href="/add_session">Add Study Session</a>
         </div>
     </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash_message {{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
     {% if sessions %}
     <div class="session">
         {% for session in sessions %}

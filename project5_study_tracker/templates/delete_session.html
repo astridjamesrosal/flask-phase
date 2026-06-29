@@ -17,6 +17,13 @@
             <a class="add-session" href="/add_session">Add Study Session</a>
         </div>
     </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash_message {{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
     <form class="confirm" action="/delete/{{ session[0] }}" method="POST">
         <div class="main_body">
             <p class="main-text">Are you sure you want to delete <span class="subject-highlight">"{{ session[1] }}"</span></p>

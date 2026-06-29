@@ -9,7 +9,8 @@ body {
     background-color: #b6d96c;
 }
 
-/* Shared — Navbar (all pages) */
+/* Navbar */
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -77,7 +78,27 @@ body {
     color: #e5f2c9;
 }
 
+/* Flash Message */
+
+.flash_message {
+    color: white;
+    padding: 10px 20px;
+    margin: 10px auto;
+    text-align: center;
+    border-radius: 20px;
+    max-width: 600px;
+}
+
+.flash_message.error {
+    background-color: #ff4640;
+}
+
+.flash_message.success {
+    background-color: #538002;
+}
+
 /* index.html CSS Properties */
+
 .empty {
     display: flex;
 }
@@ -97,6 +118,7 @@ body {
 }
 
 /* add_session.html CSS Properties */
+
 .add-form {
     background: #3c593f;
     padding: 2rem 3rem 2rem 2.7rem;
@@ -117,6 +139,7 @@ form div {
 }
 
 /* Shared — Base element styles */
+
 input {
     border-radius: 10px;
     background: #EAE2B7;
@@ -179,6 +202,7 @@ textarea {
 }
 
 /* Shared — Base element styles */
+
 button {
     background: #e7f2cb;
     padding: 1rem;
@@ -201,7 +225,8 @@ button:hover {
     color: #EAE2B7;
 }
 
-/* Index.html CSS Properties (Session-Cards */
+/* Index.html CSS Properties (Session-Cards) */
+
 .session {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -291,6 +316,7 @@ button:hover {
 }
 
 /* delete_session.html CSS Properties */
+
 .confirm {
     border: 5px solid white;
     background: #3c593f;
